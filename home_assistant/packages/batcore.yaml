@@ -1,0 +1,88 @@
+# BATCORE Foundation
+# BAT-004
+
+input_boolean:
+  batcore_house_healthy:
+    name: BATCORE House Healthy
+    icon: mdi:home-heart
+
+  batcore_infrastructure_healthy:
+    name: BATCORE Infrastructure Healthy
+    icon: mdi:server-network
+
+  batcore_water_healthy:
+    name: BATCORE Water Healthy
+    icon: mdi:water-check
+
+  batcore_security_healthy:
+    name: BATCORE Security Healthy
+    icon: mdi:shield-home
+
+  batcore_environment_healthy:
+    name: BATCORE Environment Healthy
+    icon: mdi:thermometer-check
+
+template:
+  - sensor:
+      - name: "BATCORE House Health Score"
+        unique_id: batcore_house_health_score
+        unit_of_measurement: "%"
+        state: >
+          {% set systems = [
+            states('input_boolean.batcore_infrastructure_healthy'),
+            states('input_boolean.batcore_water_healthy'),
+            states('input_boolean.batcore_security_healthy'),
+            states('input_boolean.batcore_environment_healthy')
+          ] %}
+          {% set healthy = systems | select('eq', 'on') | list | count %}
+          {{ ((healthy / (systems | count)) * 100) | round(0) }}
+
+      - name: "BATCORE Current Project"
+        unique_id: batcore_current_project
+        state: "BAT-004 - BATCORE Foundation"
+
+      - name: "BATCORE Engineering State"
+        unique_id: batcore_engineering_state
+        state: >
+          {% if is_state('input_boolean.batcore_house_healthy', 'on') %}
+            Operational
+          {% else %}
+            Attention Required
+          {% endif %}
+
+automation:
+  - id: batcore_update_house_health
+    alias: "BATCORE - Update House Health"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.batcore_infrastructure_healthy
+          - input_boolean.batcore_water_healthy
+          - input_boolean.batcore_security_healthy
+          - input_boolean.batcore_environment_healthy
+      - platform: homeassistant
+        event: start
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.batcore_infrastructure_healthy
+                state: "on"
+              - condition: state
+                entity_id: input_boolean.batcore_water_healthy
+                state: "on"
+              - condition: state
+                entity_id: input_boolean.batcore_security_healthy
+                state: "on"
+              - condition: state
+                entity_id: input_boolean.batcore_environment_healthy
+                state: "on"
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.batcore_house_healthy
+        default:
+          - service: input_boolean.turn_off
+            target:
+              entity_id: input_boolean.batcore_house_healthy
