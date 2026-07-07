@@ -1,0 +1,7 @@
+secrets.yaml
+*.db
+*.log
+backups/
+__pycache__/
+.DS_Store
+Thumbs.db
