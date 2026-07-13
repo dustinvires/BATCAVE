@@ -74,7 +74,7 @@ Includes:
 - Raspberry Pi power status
 - Processor usage
 - Memory usage
-- Processor temperature
+- Alfred CPU temperature (`sensor.system_monitor_processor_temperature`)
 - Backup manager state
 - Last/next backup timestamps
 - Sump ESP / Bluetooth proxy diagnostics

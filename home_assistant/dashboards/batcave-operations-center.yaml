@@ -175,7 +175,7 @@ views:
             min: 80
             max: 190
             needle: true
-            name: Pi Temperature
+            name: Alfred CPU Temperature
             severity:
               green: 80
               yellow: 150

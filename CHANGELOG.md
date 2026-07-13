@@ -13,6 +13,7 @@
 - Added B-hyve outdoor spigot dashboard toggle while keeping actual spigot status as the displayed truth source.
 - Documented OnStar2MQTT authentication/TOTP/access-denied research and recovery checklist.
 - Added live OnStar2MQTT UI retest notes showing manual GM login succeeds but add-on automation fails with access denied before reaching TOTP/MFA.
+- Renamed the Infrastructure dashboard processor temperature gauge to Alfred CPU Temperature.
 
 ## v0.1.0
 - BAT-001 initialized.
