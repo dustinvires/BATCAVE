@@ -1,0 +1,66 @@
+# Home Assistant backup-to-Alfred notification automations
+# Last updated: Monday, July 13, 2026 at 1:33 PM CDT
+
+- id: ha_backup_alfred_failure_alert
+  alias: Home Assistant Backup to Alfred - Failure Alert
+  description: Notify Dustin’s iPhone and create a persistent notification if an automatic Home Assistant backup fails.
+  triggers:
+    - trigger: state
+      entity_id: event.backup_automatic_backup
+  conditions:
+    - condition: template
+      value_template: "{{ state_attr('event.backup_automatic_backup', 'event_type') == 'failed' }}"
+  actions:
+    - action: notify.send_message
+      metadata: {}
+      target:
+        entity_id: notify.dustins_iphone
+      data:
+        title: Home Assistant Backup Failed
+        message: "Automatic backup to Alfred failed. Reason: {{ state_attr('event.backup_automatic_backup', 'failed_reason') or 'unknown' }}. Check Settings → System → Backups and AlfredBackups storage."
+    - action: persistent_notification.create
+      data:
+        title: Home Assistant backup failed
+        message: "Automatic backup to Alfred failed. Failed reason: {{ state_attr('event.backup_automatic_backup', 'failed_reason') or 'unknown' }}. Check Settings → System → Backups and AlfredBackups storage."
+  mode: single
+
+- id: ha_backup_alfred_daily_health_check
+  alias: Home Assistant Backup to Alfred - Daily Health Check
+  description: Daily alert if the last successful automatic backup is older than 36 hours or unavailable.
+  triggers:
+    - trigger: time
+      at: "07:00:00"
+  conditions:
+    - condition: template
+      value_template: >-
+        {% set last = states('sensor.backup_last_successful_automatic_backup') %}
+        {{ last in ['unknown','unavailable','none',''] or (now() - as_datetime(last)).total_seconds() > 36 * 3600 }}
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: Home Assistant backup may be stale
+        message: "Last successful automatic backup: {{ states('sensor.backup_last_successful_automatic_backup') }}. Expected a successful daily backup to AlfredBackups within the last 36 hours."
+  mode: single
+
+- id: ha_backup_alfred_weekly_success_summary
+  alias: Home Assistant Backup to Alfred - Weekly Success Summary
+  description: Every Sunday evening, notify Dustin’s iPhone if Home Assistant backups to Alfred have succeeded recently.
+  triggers:
+    - trigger: time
+      at: "18:00:00"
+      weekday:
+        - sun
+  conditions:
+    - condition: template
+      value_template: >-
+        {% set last = states('sensor.backup_last_successful_automatic_backup') %}
+        {{ last not in ['unknown','unavailable','none',''] and (now() - as_datetime(last)).total_seconds() <= 36 * 3600 }}
+  actions:
+    - action: notify.send_message
+      metadata: {}
+      target:
+        entity_id: notify.dustins_iphone
+      data:
+        title: Home Assistant Backups Look Good
+        message: "Weekly check: Home Assistant backups to Alfred are healthy. Last successful backup: {{ as_timestamp(states('sensor.backup_last_successful_automatic_backup')) | timestamp_custom('%A, %b %-d at %-I:%M %p') }}. Next scheduled backup: {{ as_timestamp(states('sensor.backup_next_scheduled_automatic_backup')) | timestamp_custom('%A, %b %-d at %-I:%M %p') }}."
+  mode: single
