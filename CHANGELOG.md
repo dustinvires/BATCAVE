@@ -14,6 +14,7 @@
 - Documented OnStar2MQTT authentication/TOTP/access-denied research and recovery checklist.
 - Added live OnStar2MQTT UI retest notes showing manual GM login succeeds but add-on automation fails with access denied before reaching TOTP/MFA.
 - Renamed the Infrastructure dashboard processor temperature gauge to Alfred CPU Temperature.
+- Added RockAI handoff documenting BATCAVE Home Assistant dashboard standards, workflow, safety rules, and design logic.
 
 ## v0.1.0
 - BAT-001 initialized.

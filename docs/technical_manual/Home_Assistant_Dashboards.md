@@ -1,5 +1,7 @@
 # Home Assistant Dashboards
 
+Related handoff: [Home Assistant Dashboard Handoff for RockAI](Home_Assistant_Dashboard_Handoff_for_RockAI.md)
+
 ## Purpose
 
 BATCAVE dashboards are the human-facing control and observability layer for the Vires home.
