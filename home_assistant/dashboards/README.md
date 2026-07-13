@@ -25,6 +25,11 @@ Views included:
 - **Water** — B-hyve BLE, sump ESP, future water-protection roadmap
 - **Robotics** — Terry vacuum status, room clean buttons, automations
 
+## Related Documentation
+
+- `docs/owner_manual/BATCAVE_Command_Center.md` — owner-facing guide for what each view is for.
+- `docs/technical_manual/Home_Assistant_Dashboards.md` — technical design, maintenance rules, installation notes, and future roadmap.
+
 ## Current install approach
 
 This dashboard is written as Lovelace YAML. To use it in Home Assistant, either:
