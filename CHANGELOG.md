@@ -10,6 +10,8 @@
 - Updated Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`.
 - Documented B-hyve BLE stale switch-state issue and preferred post-update status entity.
 - Simplified camera dashboard cards to one live-friendly stream per physical camera, preferring Reolink `fluent` streams for lower-latency viewing.
+- Added B-hyve Port 1 dashboard toggle while keeping actual port status as the displayed truth source.
+- Documented OnStar2MQTT authentication/TOTP/access-denied research and recovery checklist.
 
 ## v0.1.0
 - BAT-001 initialized.

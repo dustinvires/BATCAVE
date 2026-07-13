@@ -439,14 +439,19 @@ views:
             heading: Water / B-hyve Status
             icon: mdi:water-alert
           - type: tile
+            entity: switch.bhyve_ble_44_67_55_86_26_9d_port_1
+            name: Port 1 Toggle
+            icon: mdi:sprinkler
+          - type: tile
+            entity: sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status
+            name: Port 1 Actual Status
+            icon: mdi:information-outline
+          - type: tile
             entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery
             name: B-hyve Battery
           - type: tile
             entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
             name: B-hyve Battery mV
-          - type: tile
-            entity: sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status
-            name: Port 1 Status
           - type: tile
             entity: number.outside_bhyve_ble_44_67_55_86_26_9d_port_1_run_time
             name: Port 1 Run Time

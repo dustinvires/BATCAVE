@@ -29,6 +29,35 @@ Likely cause: stale or incomplete state reporting in the older BLE integration v
 ## OnStar / Buick
 onstar2mqtt has recurring access denied / MFA / TOTP issues.
 
+### 2026-07-13 Research Notes
+
+Current local observation: Home Assistant exposes the OnStar2MQTT add-on update entity, but very few OnStar MQTT entities are present. This is consistent with the add-on failing authentication before it can publish normal discovery/state topics.
+
+Relevant upstream findings:
+
+- BigThunderSR OnStar2MQTT requires username, password, PIN, VIN, unique device UUID, MQTT config, and a valid TOTP key.
+- As of the newer OnStarJS authentication flow, the GM account MFA method should be **Third-Party Authenticator App**. The docs note this option may not appear on mobile and may need to be configured from a desktop browser.
+- Valid system time/NTP is required for TOTP to work.
+- The OnStar API is rate-limited and temperamental. Polling below the default 30 minutes can trigger rate limits.
+- Open upstream issues match this installation's symptoms:
+  - `#1299 Access Denied Response` — access denied after password stage.
+  - `#1740 Authentication denied for second vehicle` — access denied despite app/web login still working.
+  - `#1552 Did not capture auth code after submit` — MFA submit occurs but authorization code is not captured.
+- PR `#1685 fix: harden MFA login in HA add-ons` reduced MFA/TOTP retry-loop problems and bumped add-ons to `2.8.5`; this installation is on `2.9.0`, so it should include that class of fix.
+
+Recommended recovery path:
+
+1. Stop the OnStar2MQTT add-on to avoid repeated login attempts while troubleshooting.
+2. Confirm the GM/myBuick account can log in from a desktop browser.
+3. Confirm the account has Third-Party Authenticator App MFA enabled, not SMS/email-only MFA.
+4. Re-copy the raw TOTP secret/key, not a one-time six-digit code.
+5. Confirm Home Assistant system time is correct via NTP.
+6. Keep `ONSTAR_REFRESH` at the default 30 minutes or longer.
+7. Confirm token persistence is configured so tokens survive restarts.
+8. If access denied continues, wait before retrying to avoid lockout-style behavior.
+9. If the add-on was upgraded from API v2-era versions, clean stale retained MQTT topics and ghost entities per the upstream v2 migration notes.
+10. Capture sanitized add-on logs from startup through the failed auth stage before opening/updating an upstream issue.
+
 ## Apple Watch Home Assistant
 Watch configuration did not populate entities/actions correctly. Deferred for later.
 
