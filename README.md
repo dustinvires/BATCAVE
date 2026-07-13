@@ -12,7 +12,7 @@ BATCAVE is the engineering repository for the Vires family home. It serves as th
 
 ## Current Build Status
 
-BATCAVE is currently in **BAT-003: Backup and Presence Reliability**.
+BATCAVE is currently in **BAT-004: Network Visibility and Eero Integration**.
 
 ### Completed
 
@@ -27,6 +27,8 @@ BATCAVE is currently in **BAT-003: Backup and Presence Reliability**.
 
 ### In observation / validation
 
+- 🚧 Eero account login/config flow
+- 🚧 Eero entities and client/device trackers
 - 🚧 First fully unattended scheduled backup to Alfred
 - 🚧 Terry’s next real away-cleaning event
 - 🚧 Kaylie location update reliability
@@ -43,7 +45,8 @@ BATCAVE is currently in **BAT-003: Backup and Presence Reliability**.
 ## Project Iterations
 
 - `projects/BAT-002_Asset_Inventory/` — baseline BATCAVE asset inventory and system map.
-- `projects/BAT-003_Backup_and_Presence_Reliability/` — current stage: Home Assistant backups to Alfred, restore readiness, backup notifications, and Terry presence automation reliability.
+- `projects/BAT-003_Backup_and_Presence_Reliability/` — Home Assistant backups to Alfred, restore readiness, backup notifications, and Terry presence automation reliability.
+- `projects/BAT-004_Network_Visibility_and_Eero_Integration/` — current stage: Eero integration, router/client visibility, and network dashboard groundwork.
 
 ## Key Documentation
 
