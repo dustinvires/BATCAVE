@@ -86,11 +86,13 @@ Camera and detection view.
 
 Includes:
 
-- Front camera views
+- One live-friendly stream per physical camera
+- Front Reolink using the `fluent` stream for lower-latency viewing
+- Front Door Ring live view as a separate doorbell camera
 - Front motion/person/vehicle/animal detection
 - Doorbell/motion events
 - Front camera activity
-- Malachi room camera views
+- Malachi room camera using the `fluent` stream for lower-latency viewing
 - Malachi room motion/person/animal/baby-cry detection
 - Malachi room privacy/recording status
 

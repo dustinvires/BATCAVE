@@ -263,21 +263,16 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Front Camera
+            heading: Front Cameras
             icon: mdi:cctv
           - type: picture-entity
             entity: camera.front_fluent
-            name: Front Fluent
-            camera_view: auto
-            show_state: false
-          - type: picture-entity
-            entity: camera.front_clear
-            name: Front Clear
+            name: Front Reolink
             camera_view: auto
             show_state: false
           - type: picture-entity
             entity: camera.front_door_live_view
-            name: Front Door Live View
+            name: Front Door Ring
             camera_view: auto
             show_state: false
 
@@ -315,12 +310,7 @@ views:
             icon: mdi:baby-face-outline
           - type: picture-entity
             entity: camera.malachi_room_fluent
-            name: Malachi Room Fluent
-            camera_view: auto
-            show_state: false
-          - type: picture-entity
-            entity: camera.malachi_room_clear
-            name: Malachi Room Clear
+            name: Malachi Room
             camera_view: auto
             show_state: false
 

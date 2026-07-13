@@ -9,6 +9,7 @@
 - Updated Shark2MQTT from `1.0.4` to `1.0.6`.
 - Updated Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`.
 - Documented B-hyve BLE stale switch-state issue and preferred post-update status entity.
+- Simplified camera dashboard cards to one live-friendly stream per physical camera, preferring Reolink `fluent` streams for lower-latency viewing.
 
 ## v0.1.0
 - BAT-001 initialized.
