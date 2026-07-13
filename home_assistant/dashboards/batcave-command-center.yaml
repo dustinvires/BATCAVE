@@ -1,0 +1,435 @@
+title: BATCAVE Command Center
+icon: mdi:bat
+views:
+  - title: Overview
+    path: overview
+    icon: mdi:view-dashboard
+    badges:
+      - entity: person.dustin
+      - entity: person.kaylie
+      - entity: input_boolean.vacation_mode_on_off
+      - entity: binary_sensor.home_occupied
+      - entity: input_boolean.house_healthy
+      - entity: input_boolean.infrastructure_healthy
+    cards:
+      - type: markdown
+        title: BATCAVE Mission
+        content: >
+          ## 🦇 BATCAVE Command Center
+
+          Safe. Reliable. Comfortable. Efficient. Maintainable. Understandable.
+
+          This dashboard is designed as the family-facing operating panel for the
+          Vires home, using live Home Assistant entities and BATCAVE documentation
+          as the source of truth.
+
+      - type: entities
+        title: House Modes & Health
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.vacation_mode_on_off
+            name: Vacation Mode
+          - entity: input_boolean.babysitter_mode
+            name: Babysitter Mode
+          - entity: binary_sensor.home_occupied
+            name: Home Occupied
+          - entity: input_boolean.house_healthy
+            name: House Healthy
+          - entity: input_boolean.infrastructure_healthy
+            name: Infrastructure Healthy
+
+      - type: weather-forecast
+        entity: weather.forecast_home
+        name: Home Forecast
+        forecast_type: daily
+
+      - type: thermostat
+        entity: climate.dining_room
+        name: Dining Room Thermostat
+
+      - type: entities
+        title: Key Comfort Readings
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dining_room_temperature
+            name: Dining Room Temperature
+          - entity: sensor.dining_room_humidity
+            name: Dining Room Humidity
+          - entity: sensor.h5075_852e_temperature
+            name: Master Temperature
+          - entity: sensor.h5075_852e_humidity
+            name: Master Humidity
+          - entity: sensor.h5075_9e9c_temperature
+            name: Malachi Bedroom Temperature
+          - entity: sensor.h5075_9e9c_humidity
+            name: Malachi Bedroom Humidity
+          - entity: sensor.h5075_2ba0_temperature
+            name: Garage Temperature
+          - entity: sensor.h5075_2ba0_humidity
+            name: Garage Humidity
+
+      - type: entities
+        title: Security Snapshot
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.front_motion
+            name: Front Motion
+          - entity: binary_sensor.front_person
+            name: Front Person
+          - entity: binary_sensor.front_vehicle
+            name: Front Vehicle
+          - entity: binary_sensor.front_animal
+            name: Front Animal
+          - entity: event.front_door_motion
+            name: Last Front Motion Event
+          - entity: event.front_door_ding
+            name: Last Doorbell Event
+
+      - type: picture-entity
+        title: Front Camera
+        entity: camera.front_fluent
+        camera_view: auto
+        show_state: false
+        show_name: true
+
+      - type: picture-entity
+        title: Malachi Room Camera
+        entity: camera.malachi_room_fluent
+        camera_view: auto
+        show_state: false
+        show_name: true
+
+      - type: entities
+        title: Terry Status
+        show_header_toggle: false
+        entities:
+          - entity: vacuum.terry
+            name: Terry
+          - entity: sensor.terry_battery
+            name: Battery
+          - entity: binary_sensor.terry_charging
+            name: Charging
+          - entity: binary_sensor.terry_error
+            name: Error
+          - entity: sensor.terry_error_status
+            name: Error Status
+          - entity: sensor.terry_wifi_signal
+            name: Wi-Fi Signal
+
+      - type: entities
+        title: Important Updates
+        show_header_toggle: false
+        entities:
+          - entity: update.home_assistant_core_update
+            name: Home Assistant Core
+          - entity: update.esphome_device_builder_update
+            name: ESPHome Device Builder
+          - entity: update.shark2mqtt_update
+            name: Shark2MQTT
+          - entity: update.orbit_b_hyve_ble_update_2
+            name: Orbit B-hyve BLE
+          - entity: update.home_assistant_operating_system_update
+            name: Home Assistant OS
+          - entity: update.home_assistant_supervisor_update
+            name: Supervisor
+
+  - title: Security
+    path: security
+    icon: mdi:cctv
+    cards:
+      - type: markdown
+        title: Security / Cameras
+        content: >
+          Camera and detection dashboard for quick awareness. Controls that could
+          change recording/privacy behavior are intentionally grouped below so they
+          are visible and deliberate.
+
+      - type: picture-entity
+        title: Front Clear
+        entity: camera.front_clear
+        camera_view: auto
+        show_state: false
+
+      - type: picture-entity
+        title: Front Fluent
+        entity: camera.front_fluent
+        camera_view: auto
+        show_state: false
+
+      - type: picture-entity
+        title: Front Door Live View
+        entity: camera.front_door_live_view
+        camera_view: auto
+        show_state: false
+
+      - type: entities
+        title: Front Detection
+        show_header_toggle: false
+        entities:
+          - binary_sensor.front_motion
+          - binary_sensor.front_person
+          - binary_sensor.front_vehicle
+          - binary_sensor.front_animal
+          - event.front_door_motion
+          - event.front_door_ding
+          - sensor.front_door_last_activity
+          - sensor.front_day_night_state
+
+      - type: entities
+        title: Front Camera Settings
+        show_header_toggle: false
+        entities:
+          - switch.front_record
+          - switch.front_record_audio
+          - switch.front_push_notifications
+          - switch.front_door_motion_detection
+          - switch.front_door_in_home_chime
+          - select.front_day_night_mode
+
+      - type: picture-entity
+        title: Malachi Room Clear
+        entity: camera.malachi_room_clear
+        camera_view: auto
+        show_state: false
+
+      - type: picture-entity
+        title: Malachi Room Fluent
+        entity: camera.malachi_room_fluent
+        camera_view: auto
+        show_state: false
+
+      - type: entities
+        title: Malachi Room Detection
+        show_header_toggle: false
+        entities:
+          - binary_sensor.malachi_room_motion
+          - binary_sensor.malachi_room_person
+          - binary_sensor.malachi_room_animal
+          - binary_sensor.malachi_room_baby_crying
+          - sensor.malachi_room_day_night_state
+          - sensor.malachi_room_ptz_pan_position
+          - sensor.malachi_room_ptz_tilt_position
+
+      - type: entities
+        title: Malachi Room Camera Settings
+        show_header_toggle: false
+        entities:
+          - switch.malachi_room_record
+          - switch.malachi_room_record_audio
+          - switch.malachi_room_privacy_mode
+          - switch.malachi_room_push_notifications
+          - switch.malachi_room_auto_tracking
+          - switch.malachi_room_siren_on_event
+          - light.malachi_room_status_led
+          - select.malachi_room_day_night_mode
+
+  - title: Climate
+    path: climate
+    icon: mdi:thermometer-water
+    cards:
+      - type: thermostat
+        entity: climate.dining_room
+        name: Dining Room
+
+      - type: humidifier
+        entity: humidifier.henry
+        name: Henry Humidifier
+
+      - type: entities
+        title: Room Temperature & Humidity
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dining_room_temperature
+            name: Dining Room Temperature
+          - entity: sensor.dining_room_humidity
+            name: Dining Room Humidity
+          - entity: sensor.h5075_852e_temperature
+            name: Master Temperature
+          - entity: sensor.h5075_852e_humidity
+            name: Master Humidity
+          - entity: sensor.h5075_9e9c_temperature
+            name: Malachi Bedroom Temperature
+          - entity: sensor.h5075_9e9c_humidity
+            name: Malachi Bedroom Humidity
+          - entity: sensor.h5075_2ba0_temperature
+            name: Garage Temperature
+          - entity: sensor.h5075_2ba0_humidity
+            name: Garage Humidity
+          - entity: sensor.henry_humidity
+            name: Henry Humidity
+
+      - type: history-graph
+        title: 24 Hour Climate Trend
+        hours_to_show: 24
+        entities:
+          - sensor.dining_room_temperature
+          - sensor.h5075_852e_temperature
+          - sensor.h5075_9e9c_temperature
+          - sensor.h5075_2ba0_temperature
+
+      - type: history-graph
+        title: 24 Hour Humidity Trend
+        hours_to_show: 24
+        entities:
+          - sensor.dining_room_humidity
+          - sensor.h5075_852e_humidity
+          - sensor.h5075_9e9c_humidity
+          - sensor.h5075_2ba0_humidity
+          - sensor.henry_humidity
+
+      - type: entities
+        title: Henry Status
+        show_header_toggle: false
+        entities:
+          - humidifier.henry
+          - sensor.henry_humidity
+          - binary_sensor.henry_low_water
+          - binary_sensor.henry_water_tank_lifted
+          - number.henry_mist_level
+          - switch.henry_auto_off
+          - switch.henry_display
+
+  - title: Infrastructure
+    path: infrastructure
+    icon: mdi:server-network
+    cards:
+      - type: markdown
+        title: Infrastructure Dashboard
+        content: >
+          Tracks Home Assistant, Raspberry Pi, network, backups, ESPHome, and
+          updates. This supports BATCAVE's reliability-over-novelty principle.
+
+      - type: entities
+        title: Infrastructure Health
+        show_header_toggle: false
+        entities:
+          - input_boolean.infrastructure_healthy
+          - binary_sensor.eero_wan_status
+          - sensor.eero_external_ip
+          - binary_sensor.rpi_power_status
+          - sensor.system_monitor_processor_use
+          - sensor.system_monitor_processor_temperature
+          - sensor.system_monitor_memory_usage
+          - sensor.system_monitor_memory_use
+
+      - type: entities
+        title: Backups
+        show_header_toggle: false
+        entities:
+          - sensor.backup_backup_manager_state
+          - sensor.backup_last_attempted_automatic_backup
+          - sensor.backup_last_successful_automatic_backup
+          - sensor.backup_next_scheduled_automatic_backup
+          - event.backup_automatic_backup
+
+      - type: entities
+        title: Sump ESP / Bluetooth Proxy
+        show_header_toggle: false
+        entities:
+          - sensor.crawl_space_sump_esp_sump_esp_connected_ssid
+          - sensor.crawl_space_sump_esp_sump_esp_ip_address
+          - sensor.crawl_space_sump_esp_sump_esp_wifi_signal
+          - sensor.crawl_space_sump_esp_sump_esp_uptime
+          - sensor.crawl_space_sump_esp_sump_esp_temperature
+          - sensor.crawl_space_sump_esp_sump_esp_version
+
+      - type: entities
+        title: Updates
+        show_header_toggle: false
+        entities:
+          - update.home_assistant_core_update
+          - update.home_assistant_operating_system_update
+          - update.home_assistant_supervisor_update
+          - update.esphome_device_builder_update
+          - update.shark2mqtt_update
+          - update.orbit_b_hyve_ble_update_2
+          - update.webrtc_camera_update
+          - update.hacs_update
+          - update.tailscale_update
+          - update.raspberry_pi_5_firmware
+
+  - title: Water
+    path: water
+    icon: mdi:water-alert
+    cards:
+      - type: markdown
+        title: Water Protection
+        content: >
+          Early water-protection panel for crawl space, sump, B-hyve, leak/shutoff
+          roadmap, and future main-water safety logic. Destructive controls are
+          intentionally minimized here.
+
+      - type: entities
+        title: B-hyve BLE
+        show_header_toggle: false
+        entities:
+          - sensor.bhyve_ble_44_67_55_86_26_9d_battery
+          - sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
+          - sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type
+          - sensor.bhyve_ble_44_67_55_86_26_9d_output_ports
+          - update.orbit_b_hyve_ble_update_2
+
+      - type: entities
+        title: Crawl Space / Sump ESP
+        show_header_toggle: false
+        entities:
+          - sensor.crawl_space_sump_esp_sump_esp_connected_ssid
+          - sensor.crawl_space_sump_esp_sump_esp_ip_address
+          - sensor.crawl_space_sump_esp_sump_esp_wifi_signal
+          - sensor.crawl_space_sump_esp_sump_esp_uptime
+          - sensor.crawl_space_sump_esp_sump_esp_temperature
+          - sensor.crawl_space_sump_esp_sump_esp_version
+
+      - type: entities
+        title: Water-Adjacent Alerts
+        show_header_toggle: false
+        entities:
+          - binary_sensor.henry_low_water
+          - binary_sensor.henry_water_tank_lifted
+          - input_boolean.vacation_mode_on_off
+
+      - type: markdown
+        title: Future Water Protection Entities
+        content: >
+          Planned BATCAVE entities to add here when installed: sump float switch,
+          wired leak probe, crawl-space SHT40 temperature/humidity, main water
+          shutoff actuator, outdoor hose valve actuators, crawl-space camera, and
+          vacation-mode leak shutoff logic.
+
+  - title: Robotics
+    path: robotics
+    icon: mdi:robot-vacuum
+    cards:
+      - type: tile
+        entity: vacuum.terry
+        name: Terry
+
+      - type: entities
+        title: Terry Status
+        show_header_toggle: false
+        entities:
+          - vacuum.terry
+          - sensor.terry_battery
+          - binary_sensor.terry_charging
+          - binary_sensor.terry_error
+          - sensor.terry_error_status
+          - sensor.terry_wifi_signal
+          - select.living_room_terry_clean_mode
+
+      - type: entities
+        title: Terry Room Clean Buttons
+        show_header_toggle: false
+        entities:
+          - button.living_room_terry_clean_living_room
+          - button.living_room_terry_clean_kitchen_1
+          - button.living_room_terry_clean_guest_bedroom
+          - button.living_room_terry_clean_master_bedroom
+          - button.living_room_terry_clean_playroom
+
+      - type: entities
+        title: Terry Automations
+        show_header_toggle: false
+        entities:
+          - automation.terry_working
+          - automation.terry_error
+          - automation.terry_go_home
