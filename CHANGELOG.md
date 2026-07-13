@@ -12,6 +12,7 @@
 - Simplified camera dashboard cards to one live-friendly stream per physical camera, preferring Reolink `fluent` streams for lower-latency viewing.
 - Added B-hyve outdoor spigot dashboard toggle while keeping actual spigot status as the displayed truth source.
 - Documented OnStar2MQTT authentication/TOTP/access-denied research and recovery checklist.
+- Added live OnStar2MQTT UI retest notes showing manual GM login succeeds but add-on automation fails with access denied before reaching TOTP/MFA.
 
 ## v0.1.0
 - BAT-001 initialized.

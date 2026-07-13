@@ -58,6 +58,25 @@ Recommended recovery path:
 9. If the add-on was upgraded from API v2-era versions, clean stale retained MQTT topics and ghost entities per the upstream v2 migration notes.
 10. Capture sanitized add-on logs from startup through the failed auth stage before opening/updating an upstream issue.
 
+### 2026-07-13 Live UI Retest
+
+Manual GM account login from a normal browser succeeded. The GM Security page showed:
+
+- Text/SMS Authentication: disabled
+- Email Authentication: disabled
+- Third-Party Authenticator App: enabled
+
+A single controlled OnStar2MQTT start was performed at approximately 14:23 CDT and then stopped when repeated retries continued. Findings:
+
+- Add-on version: `2.9.0`
+- Token/cache path `/ssl/vehicle1` is being used successfully; the add-on loaded cached unit data from `/ssl/vehicle1/.unit_cache_kl4mmgsl7mb154117.json`.
+- The add-on launches its automated GM/Microsoft authentication browser successfully under Xvfb.
+- The failure occurs after the add-on enters the email and proceeds into the password submission flow.
+- The log reports `[ACCESS DENIED]` from GM's `SelfAsserted` endpoint before the flow reaches TOTP/MFA.
+- Because the flow does not reach TOTP/MFA, regenerating the authenticator key is unlikely to fix this specific failure by itself.
+
+Current working theory: GM is blocking or denying the automated/headless/mobile-app-style login flow even though manual browser login works. Avoid repeated starts because the add-on performs multiple internal retry attempts per start and may worsen rate-limit/security-block behavior.
+
 ## Apple Watch Home Assistant
 Watch configuration did not populate entities/actions correctly. Deferred for later.
 
