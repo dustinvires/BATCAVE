@@ -440,24 +440,21 @@ views:
             icon: mdi:water-alert
           - type: tile
             entity: switch.bhyve_ble_44_67_55_86_26_9d_port_1
-            name: Port 1 Toggle
+            name: Outdoor Spigot
             icon: mdi:sprinkler
           - type: tile
             entity: sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status
-            name: Port 1 Actual Status
-            icon: mdi:information-outline
-          - type: tile
-            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery
-            name: B-hyve Battery
-          - type: tile
-            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
-            name: B-hyve Battery mV
+            name: Spigot Status
+            icon: mdi:water-check
           - type: tile
             entity: number.outside_bhyve_ble_44_67_55_86_26_9d_port_1_run_time
-            name: Port 1 Run Time
+            name: Watering Duration
           - type: tile
-            entity: sensor.bhyve_ble_44_67_55_86_26_9d_output_ports
-            name: Output Ports
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery
+            name: Hose Timer Battery
+          - type: tile
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
+            name: Hose Timer Battery mV
           - type: tile
             entity: update.orbit_b_hyve_ble_update_2
             name: B-hyve BLE Update

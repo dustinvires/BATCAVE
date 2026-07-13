@@ -127,9 +127,10 @@ Includes:
 
 B-hyve control/status design, added 2026-07-13:
 
-- `switch.bhyve_ble_44_67_55_86_26_9d_port_1` is displayed as **Port 1 Toggle**. Treat this as the command/control surface.
-- `sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status` is displayed as **Port 1 Actual Status**. Treat this as the preferred status/truth source.
-- `number.outside_bhyve_ble_44_67_55_86_26_9d_port_1_run_time` shows the configured run time.
+- `switch.bhyve_ble_44_67_55_86_26_9d_port_1` is displayed as **Outdoor Spigot**. Treat this as the command/control surface for the single B-hyve hose timer.
+- `sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status` is displayed as **Spigot Status**. Treat this as the preferred status/truth source.
+- `number.outside_bhyve_ble_44_67_55_86_26_9d_port_1_run_time` is displayed as **Watering Duration**.
+- The output-port count is intentionally hidden because this installation uses a single-output B-hyve device.
 
 This distinction is intentional because the older integration previously showed the switch as `on` even when the physical hose timer was not watering. After updating Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`, the status sensor should be used for displayed state. The older `sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type` may be restored/unavailable and should not be used as the primary dashboard status.
 
