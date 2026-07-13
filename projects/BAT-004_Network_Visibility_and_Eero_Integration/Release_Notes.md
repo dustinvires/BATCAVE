@@ -11,10 +11,15 @@
 - Restarted Home Assistant to load the integration.
 - Verified that Home Assistant now exposes the `eero` config flow handler.
 
+### Completed after login
+
+- Completed Eero account login/config flow.
+- Submitted Eero integration option screens with default selections.
+- Verified new Eero entities in Home Assistant.
+- Documented Eero entity inventory in `Eero_Entity_Inventory.md`.
+
 ### Pending
 
-- Complete Eero account login/config flow.
-- Handle any Eero OTP/verification challenge.
-- Determine whether Dustin’s Eero account uses Amazon login or standard Eero login.
-- Verify created Eero entities.
 - Build network dashboard cards/entities.
+- Decide which Eero control entities should be exposed in dashboards versus kept hidden/read-only.
+- Evaluate whether Eero Plus activity metrics are available/useful.

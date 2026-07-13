@@ -11,17 +11,19 @@
 
 ## Account setup
 
-- [ ] Enter Eero account login email/phone.
-- [ ] Complete any Eero verification/OTP challenge.
-- [ ] Confirm whether account is Amazon-login or standard Eero-login.
-- [ ] If Amazon-login blocks setup, create/add non-Amazon Eero admin account.
+- [x] Enter Eero account login email/phone.
+- [x] Complete Eero setup flow.
+- [x] Confirm integration created entities successfully.
+- [ ] Document whether account is Amazon-login or standard Eero-login if needed later.
+- [ ] If Amazon-login blocks future reauth, create/add non-Amazon Eero admin account.
 
 ## Entity verification
 
-- [ ] Confirm Eero network entities are created.
-- [ ] Confirm Eero node/device entities are created.
-- [ ] Confirm client/device trackers are created.
-- [ ] Confirm whether traffic/activity metrics are available.
+- [x] Confirm Eero network entities are created.
+- [x] Confirm Eero node/device entities are created.
+- [x] Confirm profile/client entities are created.
+- [x] Confirm speed test metrics are available.
+- [ ] Confirm whether detailed traffic/activity metrics are available.
 - [ ] Determine if Eero Plus is required for desired metrics.
 
 ## Dashboard follow-up

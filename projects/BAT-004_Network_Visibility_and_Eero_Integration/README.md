@@ -6,7 +6,7 @@ Improve BATCAVE network visibility by integrating Eero with Home Assistant so ro
 
 ## Status
 
-Started — July 13, 2026
+Implemented / dashboard design phase — July 13, 2026
 
 ## Current understanding
 
@@ -30,7 +30,9 @@ Custom HACS integration:
 - HACS panel did not render correctly in the embedded browser, so the integration was installed directly into `/config/custom_components/eero` using the running Studio Code Server add-on.
 - Home Assistant was restarted.
 - Home Assistant now exposes the `eero` config flow handler.
-- Eero setup flow has been started and is waiting for the account `login` field.
+- Eero setup flow completed successfully.
+- Eero entities are now available for BATCAVE network status, Eero nodes, speed test metrics, feature controls, and QR codes.
+- Entity inventory is documented in `Eero_Entity_Inventory.md`.
 
 ## Expected capabilities
 
@@ -49,10 +51,10 @@ Based on the integration documentation, possible capabilities include:
 
 ## Next steps
 
-1. Provide Eero account login email/phone for the setup flow.
-2. Complete any Eero verification challenge or OTP.
-3. Confirm whether the account is Amazon-authenticated or standard Eero login.
-4. Verify created Eero entities in Home Assistant.
-5. Identify useful client/device trackers.
-6. Build network visibility dashboard section/cards.
-7. Document final entity list and dashboard design.
+1. Build a network visibility dashboard section using the new Eero entities.
+2. Prioritize read-only status cards before exposing controls.
+3. Add WAN/public IP/gateway status cards.
+4. Add Garage and Office Eero node status/client count cards.
+5. Add speed test download/upload cards and optional run-speed-test button.
+6. Evaluate whether Eero Plus activity metrics are available/useful.
+7. Document dashboard design and update BATCAVE Operations Center as appropriate.
