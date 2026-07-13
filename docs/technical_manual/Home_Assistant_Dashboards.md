@@ -20,36 +20,67 @@ Dashboards must follow the BATCAVE philosophy:
 
 | File | Purpose |
 |---|---|
-| `home_assistant/dashboards/batcave-command-center.yaml` | Primary BATCAVE family dashboard with overview, security, climate, infrastructure, water, and robotics views. |
+| `home_assistant/dashboards/batcave-operations-center.yaml` | **Live dashboard source of truth** for the BATCAVE Operations Center currently installed in Home Assistant dashboard storage. |
+| `home_assistant/dashboards/batcave-operations-center.backup-2026-07-13.yaml` | Backup of the Operations Center before the 2026-07-13 expansion. |
+| `home_assistant/dashboards/batcave-command-center.yaml` | Initial generated dashboard draft retained as a reference artifact. |
 | `home_assistant/dashboards/README.md` | Dashboard folder usage notes and installation guidance. |
 
-## BATCAVE Command Center
+## Live Dashboard: BATCAVE Operations Center
 
-The BATCAVE Command Center is the first full dashboard generated from live Home Assistant entities.
+The BATCAVE Operations Center is the active Home Assistant dashboard. It was updated on 2026-07-13 through the Home Assistant raw configuration editor while preserving Dustin's existing dashboard and tab structure.
 
-### Views
+Home Assistant path:
 
-#### Overview
+```text
+/batcave-operations-center/overview
+```
+
+Update method used:
+
+```text
+BATCAVE Operations Center → Edit dashboard → Raw configuration editor
+```
+
+## Views
+
+### Overview
 
 Family-facing summary view.
 
 Includes:
 
-- House modes
+- BATCAVE mission and operating principles
 - Vacation Mode
 - Babysitter Mode
 - Home Occupied
 - House Healthy
 - Infrastructure Healthy
-- Weather
+- Weather forecast
 - Dining Room thermostat
-- Key room temperature/humidity readings
+- Comfort snapshot
 - Security snapshot
-- Front and Malachi room cameras
 - Terry status
 - Important updates
 
-#### Security
+### Infrastructure
+
+Reliability and maintenance view.
+
+Includes:
+
+- Infrastructure Healthy helper
+- eero WAN status
+- External IP
+- Raspberry Pi power status
+- Processor usage
+- Memory usage
+- Processor temperature
+- Backup manager state
+- Last/next backup timestamps
+- Sump ESP / Bluetooth proxy diagnostics
+- Update entities
+
+### Security
 
 Camera and detection view.
 
@@ -58,12 +89,12 @@ Includes:
 - Front camera views
 - Front motion/person/vehicle/animal detection
 - Doorbell/motion events
-- Front camera recording/notification settings
+- Front camera activity
 - Malachi room camera views
 - Malachi room motion/person/animal/baby-cry detection
-- Malachi room recording/privacy/notification settings
+- Malachi room privacy/recording status
 
-#### Climate
+### Environment
 
 Comfort and humidity view.
 
@@ -77,84 +108,87 @@ Includes:
 - Garage temperature/humidity
 - 24-hour temperature trend
 - 24-hour humidity trend
+- Henry low-water/tank-lifted/mist-level status
 
-#### Infrastructure
+### Utilities
 
-Reliability and maintenance view.
-
-Includes:
-
-- Infrastructure Healthy helper
-- eero WAN status
-- External IP
-- Raspberry Pi power status
-- Processor usage and temperature
-- Memory usage
-- Backups
-- Sump ESP / Bluetooth proxy diagnostics
-- Update entities
-
-#### Water
-
-Early water-protection view.
+Utility systems and robotics view.
 
 Includes:
 
 - B-hyve BLE battery/status information
-- Sump ESP diagnostics
-- Henry low-water/tank-lifted status
-- Vacation Mode context
-- Future water protection roadmap notes
+- Water-protection roadmap
+- Terry robot vacuum status
+- Terry battery/charging/error/Wi-Fi
+- Terry clean mode
+- Terry room clean buttons
 
 Intentional safety decision: v1 does **not** expose direct B-hyve port/valve controls. Water controls should be added only after explicit review.
 
-#### Robotics
+### Automations
 
-Terry robot vacuum view.
+Automation visibility view.
 
 Includes:
 
-- Terry vacuum status
-- Battery
-- Charging
-- Error state
-- Error status
-- Wi-Fi signal
-- Clean mode
-- Room clean buttons
+- Vacation Mode automations
+- Kaylie presence automations
+- Humidity alert automation
+- Automatic Dining Room light automation
 - Terry automations
+
+### Engineering
+
+Repository and documentation view.
+
+Includes:
+
+- GitHub repository link
+- Active BATCAVE work
+- Completed BAT projects
+- Dashboard documentation references
+- House/infrastructure health helpers
 
 ## Source of Truth
 
-The dashboard source of truth is this repository.
+The repository copy is the documented source of truth:
 
-Live Home Assistant entities were read from the Home Assistant API and then captured in the dashboard YAML. If entities are renamed in Home Assistant, this dashboard should be updated in GitHub as part of the change.
-
-## Installation Notes
-
-The dashboard is written as Lovelace YAML.
-
-Potential install methods:
-
-1. Copy/import the YAML into a Home Assistant dashboard.
-2. Use it as a source template while recreating cards in the Home Assistant UI.
-3. Configure Home Assistant YAML dashboards from `configuration.yaml`.
-
-Example YAML dashboard config:
-
-```yaml
-lovelace:
-  mode: yaml
-  dashboards:
-    batcave-command-center:
-      mode: yaml
-      title: BATCAVE Command Center
-      icon: mdi:bat
-      show_in_sidebar: true
-      filename: dashboards/batcave-command-center.yaml
+```text
+home_assistant/dashboards/batcave-operations-center.yaml
 ```
 
-Exact placement depends on the live Home Assistant config directory layout.
+The live Home Assistant dashboard currently exists in Home Assistant dashboard storage. Until a Git/file-based deployment path is installed, the repository and live dashboard must be kept synchronized manually through the raw configuration editor.
+
+## Deployment / Update Procedure
+
+Current procedure:
+
+1. Edit `home_assistant/dashboards/batcave-operations-center.yaml` in Git.
+2. Commit documentation and YAML together when possible.
+3. Open Home Assistant.
+4. Open **BATCAVE Operations Center**.
+5. Select **Edit dashboard**.
+6. Open **Raw configuration editor**.
+7. Paste the repository YAML.
+8. Save.
+9. Exit edit mode.
+10. Verify each tab renders.
+11. Commit any final changes and push to GitHub.
+
+## Rollback Procedure
+
+If the dashboard breaks after a change:
+
+1. Open the raw configuration editor.
+2. Replace the current YAML with the contents of:
+
+```text
+home_assistant/dashboards/batcave-operations-center.backup-2026-07-13.yaml
+```
+
+3. Save.
+4. Verify the dashboard renders.
+5. Document what failed before attempting the change again.
 
 ## Maintenance Rules
 
@@ -164,13 +198,14 @@ When changing dashboards:
 2. Confirm entity IDs exist in Home Assistant.
 3. Avoid destructive controls unless explicitly intended.
 4. Update this documentation if views, entities, or design intent change.
-5. Commit the dashboard and documentation together.
+5. Commit dashboard and documentation changes together.
+6. Keep a dated backup before major raw-editor replacements.
 
 ## Future Improvements
 
 Planned dashboard work:
 
-- Split specialized dashboards out of the Command Center if views become too dense.
+- Create a permanent Git/file-based deployment path into Home Assistant.
 - Add a dedicated water-protection dashboard after sump/leak/shutoff entities exist.
 - Add an infrastructure dashboard with network topology and unavailable entity reporting.
 - Add energy monitoring after CT clamps or another energy monitor are installed.

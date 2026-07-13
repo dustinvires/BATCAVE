@@ -1,0 +1,632 @@
+views:
+  - title: Overview
+    path: overview
+    icon: mdi:view-dashboard
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # 🦇 BATCAVE Operations Center
+
+              ## Home Status
+
+              **Mission**
+              Design • Build • Monitor • Improve • Document
+
+              **Current Project**
+              BAT-003 — Network Architecture
+
+              **Operating Principle**
+              Safe • Reliable • Comfortable • Efficient • Maintainable • Understandable
+
+              > "If it isn't documented, it doesn't exist."
+
+          - type: tile
+            entity: input_boolean.vacation_mode_on_off
+            name: Vacation Mode
+            icon: mdi:beach
+          - type: tile
+            entity: input_boolean.babysitter_mode
+            name: Babysitter Mode
+            icon: mdi:baby-face
+          - type: tile
+            entity: binary_sensor.home_occupied
+            name: Home Occupied
+            icon: mdi:home-account
+          - type: tile
+            entity: input_boolean.house_healthy
+            name: House Healthy
+            icon: mdi:home-heart
+          - type: tile
+            entity: input_boolean.infrastructure_healthy
+            name: Infrastructure Healthy
+            icon: mdi:server-network
+
+      - type: grid
+        cards:
+          - type: weather-forecast
+            entity: weather.forecast_home
+            name: Home Forecast
+            forecast_type: daily
+          - type: thermostat
+            entity: climate.dining_room
+            name: Dining Room
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Comfort Snapshot
+            icon: mdi:thermometer-water
+          - type: tile
+            entity: sensor.dining_room_temperature
+            name: Dining Room
+          - type: tile
+            entity: sensor.h5075_852e_temperature
+            name: Master
+          - type: tile
+            entity: sensor.h5075_9e9c_temperature
+            name: Malachi Bedroom
+          - type: tile
+            entity: sensor.h5075_2ba0_temperature
+            name: Garage
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Security Snapshot
+            icon: mdi:cctv
+          - type: tile
+            entity: binary_sensor.front_motion
+            name: Front Motion
+          - type: tile
+            entity: binary_sensor.front_person
+            name: Front Person
+          - type: tile
+            entity: binary_sensor.front_vehicle
+            name: Front Vehicle
+          - type: tile
+            entity: event.front_door_motion
+            name: Last Front Motion
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Terry
+            icon: mdi:robot-vacuum
+          - type: tile
+            entity: vacuum.terry
+            name: Terry
+          - type: tile
+            entity: sensor.terry_battery
+            name: Terry Battery
+          - type: tile
+            entity: binary_sensor.terry_charging
+            name: Terry Charging
+          - type: tile
+            entity: binary_sensor.terry_error
+            name: Terry Error
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Updates Needing Attention
+            icon: mdi:update
+          - type: tile
+            entity: update.home_assistant_core_update
+            name: Home Assistant Core
+          - type: tile
+            entity: update.esphome_device_builder_update
+            name: ESPHome Builder
+          - type: tile
+            entity: update.shark2mqtt_update
+            name: Shark2MQTT
+          - type: tile
+            entity: update.orbit_b_hyve_ble_update_2
+            name: Orbit B-hyve BLE
+
+  - title: Infrastructure
+    path: infrastructure
+    icon: mdi:server-network
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Infrastructure Health
+            icon: mdi:server-network
+          - type: tile
+            entity: input_boolean.infrastructure_healthy
+            name: Infrastructure Healthy
+          - type: tile
+            entity: binary_sensor.eero_wan_status
+            name: eero WAN
+          - type: tile
+            entity: sensor.eero_external_ip
+            name: External IP
+          - type: tile
+            entity: binary_sensor.rpi_power_status
+            name: Raspberry Pi Power
+          - type: gauge
+            entity: sensor.system_monitor_processor_use
+            min: 0
+            max: 100
+            needle: true
+            name: CPU Use
+            severity:
+              green: 0
+              yellow: 60
+              red: 85
+          - type: gauge
+            entity: sensor.system_monitor_memory_usage
+            min: 0
+            max: 100
+            needle: true
+            name: Memory Use
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+          - type: gauge
+            entity: sensor.system_monitor_processor_temperature
+            min: 80
+            max: 190
+            needle: true
+            name: Pi Temperature
+            severity:
+              green: 80
+              yellow: 150
+              red: 170
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Backups
+            icon: mdi:backup-restore
+          - type: tile
+            entity: sensor.backup_backup_manager_state
+            name: Backup Manager
+          - type: tile
+            entity: sensor.backup_last_successful_automatic_backup
+            name: Last Successful Backup
+          - type: tile
+            entity: sensor.backup_next_scheduled_automatic_backup
+            name: Next Backup
+          - type: tile
+            entity: event.backup_automatic_backup
+            name: Last Backup Event
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Sump ESP / Bluetooth Proxy
+            icon: mdi:chip
+          - type: tile
+            entity: sensor.crawl_space_sump_esp_sump_esp_connected_ssid
+            name: SSID
+          - type: tile
+            entity: sensor.crawl_space_sump_esp_sump_esp_ip_address
+            name: IP Address
+          - type: gauge
+            entity: sensor.crawl_space_sump_esp_sump_esp_wifi_signal
+            min: -100
+            max: -30
+            needle: true
+            name: Wi-Fi Signal
+            severity:
+              green: -65
+              yellow: -80
+              red: -100
+          - type: tile
+            entity: sensor.crawl_space_sump_esp_sump_esp_uptime
+            name: Uptime
+          - type: tile
+            entity: sensor.crawl_space_sump_esp_sump_esp_version
+            name: Version
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Updates
+            icon: mdi:update
+          - type: tile
+            entity: update.home_assistant_core_update
+            name: Core
+          - type: tile
+            entity: update.home_assistant_operating_system_update
+            name: OS
+          - type: tile
+            entity: update.home_assistant_supervisor_update
+            name: Supervisor
+          - type: tile
+            entity: update.esphome_device_builder_update
+            name: ESPHome Builder
+          - type: tile
+            entity: update.shark2mqtt_update
+            name: Shark2MQTT
+          - type: tile
+            entity: update.tailscale_update
+            name: Tailscale
+          - type: tile
+            entity: update.raspberry_pi_5_firmware
+            name: Pi Firmware
+
+  - title: Security
+    path: security
+    icon: mdi:cctv
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Front Camera
+            icon: mdi:cctv
+          - type: picture-entity
+            entity: camera.front_fluent
+            name: Front Fluent
+            camera_view: auto
+            show_state: false
+          - type: picture-entity
+            entity: camera.front_clear
+            name: Front Clear
+            camera_view: auto
+            show_state: false
+          - type: picture-entity
+            entity: camera.front_door_live_view
+            name: Front Door Live View
+            camera_view: auto
+            show_state: false
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Front Detection
+            icon: mdi:motion-sensor
+          - type: tile
+            entity: binary_sensor.front_motion
+            name: Motion
+          - type: tile
+            entity: binary_sensor.front_person
+            name: Person
+          - type: tile
+            entity: binary_sensor.front_vehicle
+            name: Vehicle
+          - type: tile
+            entity: binary_sensor.front_animal
+            name: Animal
+          - type: tile
+            entity: event.front_door_motion
+            name: Last Motion
+          - type: tile
+            entity: event.front_door_ding
+            name: Last Doorbell
+          - type: tile
+            entity: sensor.front_door_last_activity
+            name: Last Activity
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Malachi Room Camera
+            icon: mdi:baby-face-outline
+          - type: picture-entity
+            entity: camera.malachi_room_fluent
+            name: Malachi Room Fluent
+            camera_view: auto
+            show_state: false
+          - type: picture-entity
+            entity: camera.malachi_room_clear
+            name: Malachi Room Clear
+            camera_view: auto
+            show_state: false
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Malachi Room Detection
+            icon: mdi:motion-sensor
+          - type: tile
+            entity: binary_sensor.malachi_room_motion
+            name: Motion
+          - type: tile
+            entity: binary_sensor.malachi_room_person
+            name: Person
+          - type: tile
+            entity: binary_sensor.malachi_room_animal
+            name: Animal
+          - type: tile
+            entity: binary_sensor.malachi_room_baby_crying
+            name: Baby Crying
+          - type: tile
+            entity: switch.malachi_room_privacy_mode
+            name: Privacy Mode
+          - type: tile
+            entity: switch.malachi_room_record
+            name: Recording
+
+  - title: Environment
+    path: environment
+    icon: mdi:thermometer
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: thermostat
+            entity: climate.dining_room
+            name: Dining Room Thermostat
+          - type: humidifier
+            entity: humidifier.henry
+            name: Henry Humidifier
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Temperature
+            icon: mdi:thermometer
+          - type: tile
+            entity: sensor.dining_room_temperature
+            name: Dining Room
+          - type: tile
+            entity: sensor.h5075_852e_temperature
+            name: Master
+          - type: tile
+            entity: sensor.h5075_9e9c_temperature
+            name: Malachi Bedroom
+          - type: tile
+            entity: sensor.h5075_2ba0_temperature
+            name: Garage
+          - type: history-graph
+            title: 24 Hour Temperature Trend
+            hours_to_show: 24
+            entities:
+              - sensor.dining_room_temperature
+              - sensor.h5075_852e_temperature
+              - sensor.h5075_9e9c_temperature
+              - sensor.h5075_2ba0_temperature
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Humidity
+            icon: mdi:water-percent
+          - type: tile
+            entity: sensor.dining_room_humidity
+            name: Dining Room
+          - type: tile
+            entity: sensor.h5075_852e_humidity
+            name: Master
+          - type: tile
+            entity: sensor.h5075_9e9c_humidity
+            name: Malachi Bedroom
+          - type: tile
+            entity: sensor.h5075_2ba0_humidity
+            name: Garage
+          - type: tile
+            entity: sensor.henry_humidity
+            name: Henry
+          - type: history-graph
+            title: 24 Hour Humidity Trend
+            hours_to_show: 24
+            entities:
+              - sensor.dining_room_humidity
+              - sensor.h5075_852e_humidity
+              - sensor.h5075_9e9c_humidity
+              - sensor.h5075_2ba0_humidity
+              - sensor.henry_humidity
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Henry Status
+            icon: mdi:air-humidifier
+          - type: tile
+            entity: humidifier.henry
+            name: Henry
+          - type: tile
+            entity: binary_sensor.henry_low_water
+            name: Low Water
+          - type: tile
+            entity: binary_sensor.henry_water_tank_lifted
+            name: Tank Lifted
+          - type: tile
+            entity: number.henry_mist_level
+            name: Mist Level
+
+  - title: Utilities
+    path: utilities
+    icon: mdi:flash
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Water / B-hyve Status
+            icon: mdi:water-alert
+          - type: tile
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery
+            name: B-hyve Battery
+          - type: tile
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
+            name: B-hyve Battery mV
+          - type: tile
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type
+            name: Last Message
+          - type: tile
+            entity: sensor.bhyve_ble_44_67_55_86_26_9d_output_ports
+            name: Output Ports
+          - type: tile
+            entity: update.orbit_b_hyve_ble_update_2
+            name: B-hyve BLE Update
+          - type: markdown
+            content: |
+              ## Water Protection Roadmap
+
+              Future entities belong here when installed:
+
+              - Sump float switch
+              - Wired leak probe
+              - Crawl-space SHT40 temperature/humidity
+              - Main water shutoff actuator
+              - Outdoor hose valve actuators
+              - Crawl-space camera
+              - Vacation-mode leak shutoff logic
+
+              Direct water controls are intentionally not exposed in this v1 dashboard.
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Terry
+            icon: mdi:robot-vacuum
+          - type: tile
+            entity: vacuum.terry
+            name: Terry
+          - type: tile
+            entity: sensor.terry_battery
+            name: Battery
+          - type: tile
+            entity: binary_sensor.terry_charging
+            name: Charging
+          - type: tile
+            entity: binary_sensor.terry_error
+            name: Error
+          - type: tile
+            entity: sensor.terry_error_status
+            name: Error Status
+          - type: tile
+            entity: sensor.terry_wifi_signal
+            name: Wi-Fi Signal
+          - type: tile
+            entity: select.living_room_terry_clean_mode
+            name: Clean Mode
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Terry Room Clean Buttons
+            icon: mdi:map-marker-path
+          - type: tile
+            entity: button.living_room_terry_clean_living_room
+            name: Living Room
+          - type: tile
+            entity: button.living_room_terry_clean_kitchen_1
+            name: Kitchen
+          - type: tile
+            entity: button.living_room_terry_clean_guest_bedroom
+            name: Guest Bedroom
+          - type: tile
+            entity: button.living_room_terry_clean_master_bedroom
+            name: Master Bedroom
+          - type: tile
+            entity: button.living_room_terry_clean_playroom
+            name: Playroom
+
+  - title: Automations
+    path: automations
+    icon: mdi:robot
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Mode Automations
+            icon: mdi:home-automation
+          - type: tile
+            entity: automation.vacation_mode_on
+            name: Vacation Mode On
+          - type: tile
+            entity: automation.vacation_mode_off
+            name: Vacation Mode Off
+          - type: tile
+            entity: automation.kaylie_home
+            name: Kaylie Home
+          - type: tile
+            entity: automation.kaylie_leaving_home
+            name: Kaylie Leaving Home
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Comfort / Lighting
+            icon: mdi:lightbulb-auto
+          - type: tile
+            entity: automation.humidity_too_high_in_house
+            name: High Humidity Alert
+          - type: tile
+            entity: automation.automatic_dining_room_light
+            name: Automatic Dining Room Light
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Terry Automations
+            icon: mdi:robot-vacuum
+          - type: tile
+            entity: automation.terry_working
+            name: Terry Working
+          - type: tile
+            entity: automation.terry_error
+            name: Terry Error
+          - type: tile
+            entity: automation.terry_go_home
+            name: Terry Go Home
+
+  - title: Engineering
+    path: engineering
+    icon: mdi:github
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # GitHub
+
+              [Open BATCAVE Repository](https://github.com/dustinvires/BATCAVE)
+
+              ## Active Work
+
+              **BAT-003 — Network Architecture**
+              **Dashboard Branch:** `feature/home-assistant-dashboards`
+
+              ## Completed
+
+              ✅ BAT-001 — Repository Foundation
+              ✅ BAT-002 — Asset Inventory
+
+              ## Dashboard Documentation
+
+              - `home_assistant/dashboards/batcave-operations-center.yaml`
+              - `home_assistant/dashboards/README.md`
+              - `docs/owner_manual/BATCAVE_Command_Center.md`
+              - `docs/technical_manual/Home_Assistant_Dashboards.md`
+
+              ## Rule
+
+              If it changes how the home is operated, document it.
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: BATCAVE Health Helpers
+            icon: mdi:clipboard-check
+          - type: tile
+            entity: input_boolean.house_healthy
+            name: House Healthy
+          - type: tile
+            entity: input_boolean.infrastructure_healthy
+            name: Infrastructure Healthy
+          - type: tile
+            entity: input_boolean.vacation_mode_on_off
+            name: Vacation Mode
+          - type: tile
+            entity: input_boolean.babysitter_mode
+            name: Babysitter Mode

@@ -4,9 +4,29 @@ This folder contains YAML dashboards for BATCAVE.
 
 ## Dashboards
 
+### `batcave-operations-center.yaml`
+
+**Live Home Assistant dashboard.** This file represents the BATCAVE Operations Center dashboard that was edited through the Home Assistant raw configuration editor on 2026-07-13.
+
+It preserves the existing Home Assistant dashboard structure and tabs Dustin had already created:
+
+- Overview
+- Infrastructure
+- Security
+- Environment
+- Utilities
+- Automations
+- Engineering
+
+### `batcave-operations-center.backup-2026-07-13.yaml`
+
+Backup of the BATCAVE Operations Center raw dashboard YAML before the 2026-07-13 dashboard expansion.
+
+Keep this file as a rollback reference until the updated dashboard has been reviewed over time.
+
 ### `batcave-command-center.yaml`
 
-Primary family-facing dashboard built from live Home Assistant entities.
+Initial generated dashboard draft built from live Home Assistant entities. This is retained as a design/reference artifact, but the active dashboard is now `batcave-operations-center.yaml`.
 
 Design goals:
 - Safe
@@ -17,13 +37,14 @@ Design goals:
 - Understandable
 - Native Home Assistant cards first; no HACS dependency required for v1
 
-Views included:
-- **Overview** — house modes, weather, thermostat, camera snapshots, Terry, updates
-- **Security** — Reolink/Ring camera views and detection status
-- **Climate** — Nest thermostat, room sensors, humidity, Henry humidifier
-- **Infrastructure** — Home Assistant, Raspberry Pi, eero WAN, backups, updates, ESPHome
-- **Water** — B-hyve BLE, sump ESP, future water-protection roadmap
-- **Robotics** — Terry vacuum status, room clean buttons, automations
+Live Operations Center views included:
+- **Overview** — mission, house modes, weather, thermostat, comfort snapshot, security snapshot, Terry, updates
+- **Infrastructure** — Home Assistant, Raspberry Pi, eero WAN, backups, updates, ESPHome/sump ESP
+- **Security** — front camera, Malachi room camera, detection entities, camera status
+- **Environment** — thermostat, Henry humidifier, room temperature/humidity, trends
+- **Utilities** — B-hyve BLE status, water-protection roadmap, Terry vacuum controls/status
+- **Automations** — mode, presence, lighting/comfort, and Terry automations
+- **Engineering** — GitHub/repository links, active work, documentation references, health helpers
 
 ## Related Documentation
 
@@ -32,26 +53,21 @@ Views included:
 
 ## Current install approach
 
-This dashboard is written as Lovelace YAML. To use it in Home Assistant, either:
+The live dashboard currently exists in Home Assistant's dashboard storage and was updated through:
 
-1. Copy/import the YAML into a dashboard configured in YAML mode, or
-2. Use it as a source template while recreating cards in the Home Assistant UI.
-
-If using YAML dashboards from `configuration.yaml`, the shape is typically:
-
-```yaml
-lovelace:
-  mode: yaml
-  dashboards:
-    batcave-command-center:
-      mode: yaml
-      title: BATCAVE Command Center
-      icon: mdi:bat
-      show_in_sidebar: true
-      filename: dashboards/batcave-command-center.yaml
+```text
+BATCAVE Operations Center → Edit dashboard → Raw configuration editor
 ```
 
-Exact file placement depends on the live Home Assistant config directory layout. This repository copy is the documented source of truth.
+The repository copy of `batcave-operations-center.yaml` is the documented source of truth for the live dashboard configuration.
+
+Until a Git/file-based deployment path is installed, changes should be applied in this order:
+
+1. Edit/commit the YAML in this repository.
+2. Copy the YAML into the Home Assistant raw configuration editor.
+3. Save in Home Assistant.
+4. Verify the rendered dashboard.
+5. Commit any final changes and documentation updates together.
 
 ## Safety note
 

@@ -1,0 +1,136 @@
+views:
+  - title: Overview
+    path: overview
+    icon: mdi:view-dashboard
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # 🦇 BATCAVE Operations Center
+
+              ## Home Status
+
+              **Engineering State:** 🟢 Operational
+
+              **Mission**
+
+              Design • Build • Monitor • Improve • Document
+
+              ---
+
+              ### Current Project
+
+              **BAT-003 — Network Architecture**
+
+              ---
+
+              ### Objectives
+
+              - 🌐 Network Documentation
+              - 🤖 ESPHome Expansion
+              - 💧 Water Protection
+              - ⚡ Energy Monitoring
+              - 📚 Homeowner Handbook
+
+              ---
+
+              > "If it isn't documented, it doesn't exist."
+      - type: grid
+        cards:
+          - type: tile
+            entity: input_boolean.house_healthy
+            name: House Healthy
+            icon: mdi:home-heart
+            vertical: false
+            features_position: bottom
+          - type: tile
+            entity: input_boolean.infrastructure_healthy
+            name: Infrastructure Healthy
+            icon: mdi:server-network
+            vertical: false
+            features_position: bottom
+          - type: gauge
+            entity: sensor.crawl_space_sump_esp_sump_esp_wifi_signal
+            min: -100
+            max: -30
+            needle: true
+            name: ESP Network Health
+            severity:
+              green: -65
+              yellow: -80
+              red: -100
+  - title: Infrastructure
+    path: infrastructure
+    icon: mdi:server-network
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Infrastructure
+  - title: Security
+    path: security
+    icon: mdi:cctv
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Security
+  - title: Environment
+    path: environment
+    icon: mdi:thermometer
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Environment
+  - title: Utilities
+    path: utilities
+    icon: mdi:flash
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Utilities
+  - title: Automations
+    path: automations
+    icon: mdi:robot
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Automations
+  - title: Engineering
+    path: engineering
+    icon: mdi:github
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # GitHub
+
+              [Open BATCAVE Repository](https://github.com/dustinvires/BATCAVE)
+
+              ## Active Work
+
+              **BAT-003 — Network Architecture**
+
+              ## Completed
+
+              ✅ BAT-001 — Repository Foundation
+              ✅ BAT-002 — Asset Inventory
