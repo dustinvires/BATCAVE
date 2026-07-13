@@ -1,0 +1,81 @@
+# Terry presence-based cleaning automation
+# Last updated: Monday, July 13, 2026 at 1:47 PM CDT
+
+- id: '1782743836748'
+  alias: Terry Working!
+  description: >-
+    Start Terry after both Dustin and Kaylie have been away for 15 minutes,
+    unless the house is still occupied by someone else. Vacation mode does not
+    block cleaning.
+  triggers:
+    - trigger: state
+      entity_id: person.dustin
+      to: not_home
+      for:
+        hours: 0
+        minutes: 15
+        seconds: 0
+    - trigger: state
+      entity_id: person.kaylie
+      to: not_home
+      for:
+        hours: 0
+        minutes: 15
+        seconds: 0
+  conditions:
+    - condition: time
+      after: "08:00:00"
+      before: "17:00:00"
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+    - condition: state
+      entity_id: person.dustin
+      state: not_home
+    - condition: state
+      entity_id: person.kaylie
+      state: not_home
+    - condition: device
+      device_id: 35ce1bda4ba7a04717de4e0e9f1c54d4
+      domain: vacuum
+      entity_id: 31fe423f2b20f7184b6e165a2d214d88
+      type: is_docked
+    - condition: state
+      entity_id: binary_sensor.home_occupied
+      state: "off"
+    - type: is_battery_level
+      condition: device
+      device_id: 35ce1bda4ba7a04717de4e0e9f1c54d4
+      entity_id: 0ce5aba260c25812fe21aeda3cf4b5b2
+      domain: sensor
+      above: 90
+  actions:
+    - condition: state
+      entity_id: person.dustin
+      state: not_home
+    - condition: state
+      entity_id: person.kaylie
+      state: not_home
+    - condition: state
+      entity_id: binary_sensor.home_occupied
+      state: "off"
+    - action: notify.send_message
+      metadata: {}
+      target:
+        entity_id:
+          - notify.dustins_iphone
+          - notify.kaylies
+      data:
+        message: Terry has detected nobody home for 15 minutes and started cleaning.
+        title: Terry Working!
+    - action: vacuum.start
+      metadata: {}
+      data: {}
+      target:
+        device_id: 35ce1bda4ba7a04717de4e0e9f1c54d4
+  mode: single
