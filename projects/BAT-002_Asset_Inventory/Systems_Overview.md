@@ -19,7 +19,10 @@ Future CT clamp monitoring for whole-home and branch circuit energy usage.
 Reolink cameras, AI detection, TV display ideas, motion/person events, and future crawl space camera.
 
 ## Robotics System
-Shark robot vacuum “Terry,” away-mode cleaning, stuck notifications, and docking behavior.
+Shark robot vacuum “Terry,” away-mode cleaning, stuck notifications, and docking behavior. Terry away-cleaning now starts when Dustin and Kaylie have both been away for 15 minutes, the house is not otherwise occupied, Terry is docked, and battery is above 90%.
+
+## Backup / Resilience System
+Home Assistant creates daily automatic backups to Alfred via the `AlfredBackups` SMB mount. Alfred keeps backup files for roughly 20 days and has a scheduled cleanup task. Backup failure, stale-backup, and weekly success-summary notifications are configured.
 
 ## Maintenance System
-Future reminders for HVAC filters, sump testing, water softener, camera cleaning, UPS, firmware updates, and seasonal hose shutoff.
+Future reminders for HVAC filters, sump testing, water softener, camera cleaning, UPS, firmware updates, seasonal hose shutoff, and backup verification.

@@ -14,7 +14,9 @@
 | ID | Asset | Location | Status | Notes |
 |---|---|---|---|---|
 | SRV-001 | Raspberry Pi 5 Home Assistant Server | Garage | Active | Primary Home Assistant OS server. |
+| SRV-002 | Alfred Windows PC | Office / main PC location | Active | SMB backup target for Home Assistant; static IP `192.168.4.96`; hosts `\\ALFRED\HomeAssistantBackups`. |
 | STR-001 | SSD/NVMe boot media | Garage | Active | Old SSD stable after new NVMe/image issues. |
+| STR-002 | Alfred Home Assistant backup share | Alfred | Active | Stores daily Home Assistant backups with 20-day retention. |
 
 ## ESPHome Nodes
 
@@ -54,7 +56,7 @@
 
 | ID | Asset | Location | Status | Notes |
 |---|---|---|---|---|
-| VAC-001 | Shark IQ Robot Vacuum “Terry” | Living areas | Active | Controlled by shark2mqtt. Away/dock automations configured. |
+| VAC-001 | Shark IQ Robot Vacuum “Terry” | Living areas | Active | Controlled by shark2mqtt. Away-cleaning automation uses Dustin/Kaylie presence, `home_occupied`, docked state, and battery >90%. |
 
 ## Entertainment / TVs
 
@@ -76,6 +78,7 @@
 
 | ID | Helper | Status | Notes |
 |---|---|---|---|
-| HLP-001 | Vacation Mode | Active | Used for thermostat and automation gating. |
-| HLP-002 | Babysitter Mode | Planned/Active | Prevents Terry/Away automations when someone is watching Malachi. |
-| HLP-003 | House Occupied | Planned/Active | Aggregate occupancy logic. |
+| HLP-001 | Vacation Mode | Active | Used for thermostat behavior; no longer blocks Terry cleaning. |
+| HLP-002 | Babysitter Mode | Planned/Active | Intended to prevent Terry/Away automations when someone is watching Malachi. |
+| HLP-003 | House Occupied | Active | Aggregate occupancy logic; intentionally blocks Terry if someone else appears to be home. |
+| HLP-004 | AlfredBackups | Active | Home Assistant network backup storage mount targeting Alfred SMB share. |

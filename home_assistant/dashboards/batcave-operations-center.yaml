@@ -455,8 +455,11 @@ views:
             entity: sensor.bhyve_ble_44_67_55_86_26_9d_battery_mv
             name: B-hyve Battery mV
           - type: tile
-            entity: sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type
-            name: Last Message
+            entity: sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status
+            name: Port 1 Status
+          - type: tile
+            entity: number.outside_bhyve_ble_44_67_55_86_26_9d_port_1_run_time
+            name: Port 1 Run Time
           - type: tile
             entity: sensor.bhyve_ble_44_67_55_86_26_9d_output_ports
             name: Output Ports

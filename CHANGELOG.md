@@ -1,4 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Added and installed the live BATCAVE Operations Center dashboard in Home Assistant.
+- Documented dashboard deployment, rollback, and maintenance procedures.
+- Updated Home Assistant Core from `2026.7.1` to `2026.7.2`.
+- Updated ESPHome Device Builder from `2026.6.4` to `2026.6.5`.
+- Updated Shark2MQTT from `1.0.4` to `1.0.6`.
+- Updated Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`.
+- Documented B-hyve BLE stale switch-state issue and preferred post-update status entity.
+
 ## v0.1.0
 - BAT-001 initialized.

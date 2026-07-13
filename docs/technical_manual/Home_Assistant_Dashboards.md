@@ -125,6 +125,8 @@ Includes:
 
 Intentional safety decision: v1 does **not** expose direct B-hyve port/valve controls. Water controls should be added only after explicit review.
 
+B-hyve status note, added 2026-07-13: after updating Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`, prefer `sensor.outside_bhyve_ble_44_67_55_86_26_9d_port_1_status` for displayed port state. The older `sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type` may be restored/unavailable and should not be used as the primary dashboard status.
+
 ### Automations
 
 Automation visibility view.
