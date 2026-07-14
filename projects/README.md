@@ -4,11 +4,27 @@ Each project receives a BAT-### folder with design and as-built documentation.
 
 ## Current iteration
 
+### BAT-005: Vehicle Integration Reliability
+
+Folder: `BAT-005_Vehicle_Integration_Reliability/`
+
+Status: **Started / observation phase**
+
+Scope:
+
+- Uconnect / Chrysler Dadvan data freshness
+- Uconnect command entities
+- Stale-data alerts
+- Vehicle dashboard freshness/status cards
+- Connected-services limitation documentation
+
+## Project history
+
 ### BAT-004: Network Visibility and Eero Integration
 
 Folder: `BAT-004_Network_Visibility_and_Eero_Integration/`
 
-Status: **Started / account setup pending**
+Status: **Implemented / dashboard design phase**
 
 Scope:
 
@@ -17,8 +33,6 @@ Scope:
 - Eero network/node/client entities
 - Network visibility dashboard groundwork
 - Traffic/activity metric feasibility
-
-## Project history
 
 ### BAT-003: Backup and Presence Reliability
 
@@ -53,6 +67,6 @@ Scope:
 
 ## Planned future project candidates
 
-- BAT-005: Water Protection and Crawl Space Monitoring
-- BAT-006: Energy Monitoring
-- BAT-007: Infrastructure Watchdogs and UPS Monitoring
+- BAT-006: Water Protection and Crawl Space Monitoring
+- BAT-007: Energy Monitoring
+- BAT-008: Infrastructure Watchdogs and UPS Monitoring
