@@ -1,0 +1,102 @@
+# Terry rescue and pre-stuck protection automations
+# Last updated: Monday, July 13, 2026 at 8:24 PM CDT
+#
+# Purpose:
+#   Help Terry return home before he becomes fully unrecoverable, and provide
+#   one guarded recovery attempt for selected physical-stuck errors.
+
+- id: terry_early_rescue_return_home
+  alias: Terry Early Rescue Return Home
+  description: >-
+    Sends Terry home when early signs suggest he is stuck, paused, idle away
+    from dock, or reporting an error. This is the safe first layer before any
+    brute-force recovery attempt.
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.terry_error
+      to: "on"
+    - trigger: state
+      entity_id: sensor.terry_error_status
+      from: No error
+    - trigger: state
+      entity_id: vacuum.terry
+      to: idle
+      for:
+        minutes: 3
+    - trigger: state
+      entity_id: vacuum.terry
+      to: paused
+      for:
+        minutes: 3
+  conditions:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: vacuum.terry
+          state: docked
+    - condition: state
+      entity_id: binary_sensor.terry_charging
+      state: "off"
+  actions:
+    - action: vacuum.return_to_base
+      target:
+        entity_id: vacuum.terry
+      data: {}
+    - action: persistent_notification.create
+      data:
+        title: Terry Early Rescue
+        message: >-
+          Terry Early Rescue sent Terry home. State={{ states('vacuum.terry') }},
+          error={{ states('sensor.terry_error_status') }},
+          battery={{ states('sensor.terry_battery') }}%.
+        notification_id: terry_early_rescue_return_home
+    - action: notify.send_message
+      metadata: {}
+      target:
+        entity_id:
+          - notify.dustins_iphone
+          - notify.kaylies
+      data:
+        title: Terry Early Rescue
+        message: >-
+          Terry showed an early stuck/error signal, so Home Assistant sent him
+          home. Error: {{ states('sensor.terry_error_status') }}.
+
+- id: terry_emergency_unstick_candidate
+  alias: Terry Emergency Unstick Candidate
+  description: >-
+    Calls the guarded Terry Emergency Unstick Attempt script for selected
+    physical-stuck errors, including the cliff sensor blocked error because it
+    has been personally recoverable before. This should not loop.
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: sensor.terry_error_status
+    - trigger: state
+      entity_id: binary_sensor.terry_error
+      to: "on"
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.terry_error
+      state: "on"
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: vacuum.terry
+          state: docked
+    - condition: template
+      value_template: >-
+        {{ states('sensor.terry_error_status') in [
+          'Side wheel is stuck',
+          'Side brush is stuck',
+          'Brushroll stuck',
+          'Bumper is stuck',
+          'Cliff sensor is blocked',
+          'Front wheel is stuck',
+          'Top bumper is stuck',
+          'Wheel encoder error'
+        ] }}
+  actions:
+    - action: script.terry_emergency_unstick_attempt
+      data: {}

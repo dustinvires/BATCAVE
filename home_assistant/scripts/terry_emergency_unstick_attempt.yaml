@@ -1,0 +1,113 @@
+# Terry emergency unstick script
+# Last updated: Monday, July 13, 2026 at 8:24 PM CDT
+#
+# Purpose:
+#   Attempt one short, guarded recovery when Terry is already in a physical
+#   stuck-style error state and cannot normally return to dock.
+#
+# Safety notes:
+#   - This is intentionally short and conservative.
+#   - Do not loop this script.
+#   - Use only for recoverable physical-stuck errors.
+#   - If the error remains, Terry is stopped and humans are notified.
+
+terry_emergency_unstick_attempt:
+  alias: Terry Emergency Unstick Attempt
+  description: >-
+    One guarded attempt to help Terry shake loose from selected physical stuck
+    errors, then return to dock. Includes cliff sensor because this has been
+    personally recoverable before. Stops and notifies if recovery fails.
+  mode: single
+  sequence:
+    - variables:
+        terry_error: "{{ states('sensor.terry_error_status') }}"
+        allowed_errors:
+          - Side wheel is stuck
+          - Side brush is stuck
+          - Brushroll stuck
+          - Bumper is stuck
+          - Cliff sensor is blocked
+          - Front wheel is stuck
+          - Top bumper is stuck
+          - Wheel encoder error
+        blocked_errors:
+          - No dustbin
+          - Battery power is low
+          - Critical low battery
+          - Switched off
+          - Wrong power adapter
+          - Base placement error
+    - condition: template
+      value_template: >-
+        {{ is_state('binary_sensor.terry_error', 'on')
+           and terry_error in allowed_errors
+           and terry_error not in blocked_errors
+           and not is_state('vacuum.terry', 'docked') }}
+    - action: notify.send_message
+      metadata: {}
+      target:
+        entity_id:
+          - notify.dustins_iphone
+          - notify.kaylies
+      data:
+        title: Terry Emergency Unstick Attempt
+        message: >-
+          Terry reported "{{ terry_error }}". Attempting one short stop/start
+          recovery, then sending him home.
+    - action: vacuum.stop
+      target:
+        entity_id: vacuum.terry
+      data: {}
+    - delay:
+        seconds: 12
+    - action: vacuum.start
+      target:
+        entity_id: vacuum.terry
+      data: {}
+    - delay:
+        seconds: 8
+    - action: vacuum.return_to_base
+      target:
+        entity_id: vacuum.terry
+      data: {}
+    - delay:
+        minutes: 2
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.terry_error
+              state: "on"
+          sequence:
+            - action: vacuum.stop
+              target:
+                entity_id: vacuum.terry
+              data: {}
+            - action: persistent_notification.create
+              data:
+                title: Terry needs help
+                message: >-
+                  Terry still reports "{{ states('sensor.terry_error_status') }}"
+                  after the emergency unstick attempt. He was stopped to avoid
+                  damage and needs manual rescue.
+                notification_id: terry_emergency_unstick_failed
+            - action: notify.send_message
+              metadata: {}
+              target:
+                entity_id:
+                  - notify.dustins_iphone
+                  - notify.kaylies
+              data:
+                title: Terry needs help
+                message: >-
+                  Terry still reports "{{ states('sensor.terry_error_status') }}"
+                  after the emergency unstick attempt. He was stopped and needs
+                  manual rescue.
+      default:
+        - action: persistent_notification.create
+          data:
+            title: Terry recovery attempted
+            message: >-
+              Terry emergency unstick attempt completed. Current state:
+              {{ states('vacuum.terry') }}; error status:
+              {{ states('sensor.terry_error_status') }}.
+            notification_id: terry_emergency_unstick_completed

@@ -148,6 +148,23 @@ Includes:
 - Automatic Dining Room light automation
 - Terry automations
 
+#### Terry Rescue / Pre-Stuck Protection
+
+Terry has two source-controlled rescue layers:
+
+- `home_assistant/automations/terry_rescue_return_home.yaml`
+- `home_assistant/scripts/terry_emergency_unstick_attempt.yaml`
+
+Design intent:
+
+1. **Terry Early Rescue Return Home** sends Terry home when he reports an early error or remains idle/paused away from dock while not charging.
+2. **Terry Emergency Unstick Candidate** calls a guarded one-shot recovery script for selected physical-stuck errors.
+3. **Terry Emergency Unstick Attempt** performs one short stop/start pulse, then sends Terry home. If the error remains after two minutes, Terry is stopped and humans are notified.
+
+Allowed emergency-recovery errors include wheel, brush, bumper, wheel encoder, and **Cliff sensor is blocked**. Cliff sensor is included intentionally because this has been personally recoverable before. Non-recoverable/safety errors such as no dustbin, critical low battery, switched off, wrong power adapter, and base placement errors should not be brute-forced.
+
+These automations are intentionally conservative and should not loop.
+
 ### Engineering
 
 Repository and documentation view.
