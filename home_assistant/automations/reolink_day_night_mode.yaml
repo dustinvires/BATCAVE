@@ -1,0 +1,92 @@
+# Reolink day/night mode automation
+# Last updated: Monday, July 13, 2026 at 9:50 PM CDT
+#
+# Purpose:
+#   Force the front outdoor Reolink camera into the correct day/night mode
+#   based on sun position instead of relying only on the camera's light sensor.
+#
+# Background:
+#   The front camera can be fooled by exterior/porch lights and remain in day
+#   mode at night. On 2026-07-13 at 21:50 CDT, Home Assistant showed:
+#     - sun below horizon
+#     - select.front_day_night_mode = auto
+#     - sensor.front_day_night_state = day
+#   The dashboard/live camera was therefore not reliably switching to night mode.
+#
+# Policy:
+#   - At night, force Front to black/white mode so IR/night behavior wins over
+#     outdoor light pollution.
+#   - During the day, force Front to color mode.
+#   - Keep this targeted to the outdoor Front camera first. Do not change the
+#     Malachi Room camera day/night policy unless explicitly approved.
+
+- id: reolink_front_force_night_mode
+  alias: Reolink Front Force Night Mode
+  description: >-
+    Force the outdoor Front Reolink camera to black/white night mode after
+    sunset so porch/exterior lights do not keep it stuck in day mode.
+  mode: single
+  triggers:
+    - trigger: sun
+      event: sunset
+      offset: "00:20:00"
+    - trigger: state
+      entity_id: sun.sun
+      to: below_horizon
+      for:
+        minutes: 20
+  conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: select.front_day_night_mode
+          state: blackwhite
+  actions:
+    - action: select.select_option
+      target:
+        entity_id: select.front_day_night_mode
+      data:
+        option: blackwhite
+    - action: logbook.log
+      data:
+        name: Reolink Front
+        message: Forced Front camera to black/white night mode.
+        entity_id: select.front_day_night_mode
+
+- id: reolink_front_force_day_mode
+  alias: Reolink Front Force Day Mode
+  description: >-
+    Force the outdoor Front Reolink camera back to color mode after sunrise.
+  mode: single
+  triggers:
+    - trigger: sun
+      event: sunrise
+      offset: "00:20:00"
+    - trigger: state
+      entity_id: sun.sun
+      to: above_horizon
+      for:
+        minutes: 20
+  conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: above_horizon
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: select.front_day_night_mode
+          state: color
+  actions:
+    - action: select.select_option
+      target:
+        entity_id: select.front_day_night_mode
+      data:
+        option: color
+    - action: logbook.log
+      data:
+        name: Reolink Front
+        message: Forced Front camera to color day mode.
+        entity_id: select.front_day_night_mode

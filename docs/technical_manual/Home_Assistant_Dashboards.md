@@ -95,6 +95,7 @@ Includes:
 - Front motion/person/vehicle/animal detection
 - Doorbell/motion events
 - Front camera activity
+- Front Reolink day/night mode policy via `home_assistant/automations/reolink_day_night_mode.yaml`: force `blackwhite` after sunset and `color` after sunrise because exterior lights can fool the camera's `auto` mode into staying in day mode at night.
 - Malachi room camera using the `fluent` stream for lower-latency viewing
 - Malachi room motion/person/animal/baby-cry detection
 - Malachi room privacy/recording status
