@@ -144,7 +144,7 @@ Dadvan / vehicle status and command view.
 
 Includes:
 
-- Dadvan dashboard header and placeholder van image (`/local/batcave/dadvan.svg`)
+- Dadvan dashboard header and prepared photo/image slot
 - Uconnect data freshness (`sensor.chrysler_dadvan_last_info_update_at`)
 - Location freshness and tracker status
 - Odometer, fuel, oil life, health report, and maintenance fields
@@ -155,7 +155,7 @@ Includes:
 
 Safety note: vehicle commands are grouped under **Deliberate Vehicle Commands** with an explicit warning. These controls can cause real-world vehicle actions and should be used intentionally.
 
-Image note: the Dadvan placeholder image is source-controlled at `home_assistant/www/batcave/dadvan.svg`. To render live, copy it to Home Assistant at `/config/www/batcave/dadvan.svg`; the dashboard references it as `/local/batcave/dadvan.svg`.
+Image note: the Dadvan placeholder image is source-controlled at `home_assistant/www/batcave/dadvan.svg`, but the live dashboard currently omits the picture card until the file is installed at `/config/www/batcave/dadvan.svg` or replaced with a real Dadvan photo.
 
 ### Automations
 

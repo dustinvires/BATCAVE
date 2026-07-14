@@ -26,5 +26,7 @@
 - [x] Add vehicle freshness/staleness card to dashboard source.
 - [x] Add standalone Dadvan command center dashboard source.
 - [x] Add Dadvan view to Operations Center source dashboard.
-- [ ] Sync Vehicles/Dadvan dashboard changes into the live Home Assistant dashboard UI.
-- [ ] Verify Dadvan dashboard renders correctly on desktop/mobile.
+- [x] Sync Vehicles/Dadvan dashboard changes into the live Home Assistant dashboard UI.
+- [x] Verify Dadvan dashboard renders correctly on desktop.
+- [ ] Verify Dadvan dashboard renders correctly on mobile.
+- [ ] Install `/config/www/batcave/dadvan.svg` or replace with a real Dadvan photo, then optionally re-enable the picture card.

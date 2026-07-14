@@ -18,7 +18,7 @@
 - Added source-controlled Terry early rescue and guarded emergency unstick automation/script drafts, including cliff-sensor recovery as an allowed stuck-style error.
 - Forced the front Reolink camera into black/white night mode live and added source-controlled day/night automations to use sun position instead of the camera's light-confused auto mode.
 - Added Dadvan / Vehicles dashboard view with Uconnect freshness, vehicle health, tire pressure, location, refresh actions, and deliberately grouped vehicle commands.
-- Added standalone `dadvan-command-center.yaml` dashboard source and Dadvan SVG placeholder image.
+- Added standalone `dadvan-command-center.yaml` dashboard source and source-controlled Dadvan SVG placeholder; live picture card is deferred until the static image file is installed in Home Assistant.
 
 ## v0.1.0
 - BAT-001 initialized.

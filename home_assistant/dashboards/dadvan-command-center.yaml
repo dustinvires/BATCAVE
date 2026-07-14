@@ -18,13 +18,7 @@ views:
 
               This dashboard separates **status** from **commands**. Vehicle commands should only be used when you intentionally want the van to respond.
 
-          - type: picture
-            image: /local/batcave/dadvan.svg
-            alt_text: Dadvan image placeholder
-            tap_action:
-              action: none
-            hold_action:
-              action: none
+              > Vehicle image/photo slot is omitted from the live view until `/config/www/batcave/dadvan.svg` or a real Dadvan photo is installed.
 
       - type: grid
         cards:

@@ -13,7 +13,7 @@
 - Added T-Mobile SyncUP DRIVE / OBD-II research notes.
 - Added vehicle tracking alternatives comparison including Traccar and API-first OBD trackers.
 - Added standalone Dadvan dashboard source and Vehicles view for the BATCAVE Operations Center.
-- Added Dadvan SVG placeholder image for the dashboard.
+- Added Dadvan SVG placeholder image source for future dashboard use; live picture card is deferred until the static file is installed in Home Assistant.
 
 ### Findings
 
