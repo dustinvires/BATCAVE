@@ -11,11 +11,15 @@
 - [x] Test Refresh Location command.
 - [x] Add stale-data alert automation.
 - [x] Verify stale-data alert automation is enabled.
+- [x] Research T-Mobile SyncUP DRIVE / OBD-II reporting behavior.
+- [x] Research Home Assistant-friendly alternatives.
 
 ## Remaining validation
 
 - [ ] Drive Dadvan and check if telemetry updates after trip completion.
-- [ ] Compare Home Assistant values with official Chrysler/Uconnect app.
+- [ ] Compare Home Assistant values with official Chrysler/Uconnect app and, if applicable, T-Mobile/T-Life SyncUP DRIVE app.
+- [ ] Check SyncUP DRIVE LED state while vehicle is outside and running: solid green expected for cellular/GPS connection.
+- [ ] Reseat/restart SyncUP DRIVE OBD-II device if data does not refresh after the next drive.
 - [ ] Confirm connected services/subscription status.
 - [ ] Determine whether PIN setup is needed for command refresh behavior.
 - [ ] Decide whether command entities should be exposed on dashboards.

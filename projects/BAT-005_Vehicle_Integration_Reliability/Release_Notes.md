@@ -10,6 +10,8 @@
 - Confirmed default scan interval is already 5 minutes.
 - Enabled Uconnect command entities.
 - Added stale-data notification automation for Chrysler Dadvan telemetry.
+- Added T-Mobile SyncUP DRIVE / OBD-II research notes.
+- Added vehicle tracking alternatives comparison including Traccar and API-first OBD trackers.
 
 ### Findings
 
@@ -17,6 +19,9 @@
 - Official app staleness suggests the root cause may be the van/Stellantis cloud rather than Home Assistant.
 - Uconnect update requests re-fetch cloud data but do not guarantee fresh vehicle data.
 - Real-time vehicle tracking is not supported by the Uconnect API.
+- T-Mobile SyncUP DRIVE-style OBD devices may not report fresh data until the vehicle is started/driven.
+- Since the Dadvan has not been driven since July 10, the stale July 10 timestamp may be normal no-drive/sleep behavior.
+- No obvious public Home Assistant integration was found for T-Mobile SyncUP DRIVE itself.
 
 ### Pending
 

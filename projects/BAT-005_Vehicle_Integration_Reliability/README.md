@@ -30,6 +30,60 @@ sensor.chrysler_dadvan_last_info_update_at = 2026-07-10T23:50:09+00:00
 
 This matters because Home Assistant can only report what the Uconnect/Stellantis cloud returns. If the official Chrysler/Uconnect app is stale too, the likely issue is the vehicle modem, vehicle sleep state, account/cloud backend, or Stellantis service rather than Home Assistant polling.
 
+Important context added July 13, 2026 at 8:21 PM CDT: the van has not been driven since July 10. That lines up exactly with the stale timestamp and may be normal behavior if the vehicle or connected service only publishes fresh data after engine/start/drive events.
+
+### T-Mobile SyncUP DRIVE / OBD-II research
+
+The T-Mobile OBD-II plug-in product is likely **SyncUP DRIVE**.
+
+Official T-Mobile documentation indicates:
+
+- The device plugs into the vehicle OBD-II port.
+- It uses T-Mobile cellular data and GPS.
+- Initial setup requires starting the engine and going for a drive.
+- Troubleshooting explicitly says to wait after setup and take the car on a drive.
+- LED status matters:
+  - solid green means connected to cellular data/GPS,
+  - solid red means powered but not connected,
+  - blinking green can mean it has not connected to cellular/GPS yet.
+- SyncUP DRIVE is a **one-way reader**. It reports vehicle/location data but cannot remotely control locks, engine, horn, etc.
+
+Implication for Dadvan:
+
+- If the Dadvan has not moved since July 10, stale SyncUP/Uconnect-style telemetry may be expected.
+- A parked/sleeping vehicle may not continuously produce fresh OBD/location events.
+- If the official app still shows July 10 after the next drive, the likely issue shifts toward the OBD device, cellular/GPS signal, account provisioning, device firmware, or T-Mobile/SyncUP backend.
+
+No obvious public Home Assistant integration was found for T-Mobile SyncUP DRIVE itself. That means SyncUP DRIVE is useful in its own app, but it is not currently a strong automation-native BATCAVE data source unless a supported API or reverse-engineered integration becomes available.
+
+### Better-solution comparison
+
+Current best options:
+
+1. **Keep Uconnect/SyncUP as-is and monitor freshness**
+   - Lowest effort.
+   - Best if stale data simply means the van has not been driven.
+   - Home Assistant stale-data alert handles visibility.
+
+2. **Use Home Assistant mobile-app location as the practical automation source**
+   - Best for person-based automations.
+   - Already works with iPhones.
+   - Does not provide vehicle health/fuel/odometer.
+
+3. **Use Traccar with a dedicated GPS tracker**
+   - Strongest Home Assistant-native option for vehicle location.
+   - Home Assistant has official Traccar Client and Traccar Server integrations.
+   - Supports device trackers, motion/status, speed, geofence events, and sensors.
+   - Requires separate tracker hardware/SIM or phone client.
+   - Better for reliable location/geofencing than Uconnect/SyncUP, but not necessarily better for vehicle-health data.
+
+4. **Use Bouncie or another API-first OBD tracker**
+   - Potentially better if official API access is available.
+   - Needs more product/API verification before adopting.
+   - May duplicate SyncUP monthly cost.
+
+Preliminary recommendation: do not replace the current setup yet. First drive the van and observe whether data refreshes. If it refreshes after driving, the stale July 10 timestamp is probably normal sleep/no-drive behavior. If it does not refresh after driving, consider reseating/restarting the OBD device, checking LED/cellular/GPS state, and contacting T-Mobile before buying new hardware.
+
 ## Actions taken
 
 - Researched `hass-uconnect` behavior and limitations.
