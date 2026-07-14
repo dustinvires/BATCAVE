@@ -1,0 +1,250 @@
+title: Dadvan Command Center
+icon: mdi:car-estate
+views:
+  - title: Dadvan
+    path: dadvan
+    icon: mdi:car-estate
+    type: sections
+    max_columns: 4
+    sections:
+      - type: grid
+        cards:
+          - type: markdown
+            content: |
+              # 🚐 Dadvan Command Center
+
+              **Vehicle:** 2017 Chrysler Pacifica / Chrysler Dadvan  
+              **Purpose:** quick view of vehicle health, freshness, location status, and deliberate Uconnect actions.
+
+              This dashboard separates **status** from **commands**. Vehicle commands should only be used when you intentionally want the van to respond.
+
+          - type: picture
+            image: /local/batcave/dadvan.svg
+            alt_text: Dadvan image placeholder
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Freshness / Connectivity
+            icon: mdi:cloud-sync
+          - type: tile
+            entity: sensor.chrysler_dadvan_last_info_update_at
+            name: Last Vehicle Data
+            icon: mdi:update
+          - type: tile
+            entity: sensor.chrysler_dadvan_last_location_update_at
+            name: Last Location Update
+            icon: mdi:map-clock
+          - type: tile
+            entity: device_tracker.garage_chrysler_dadvan_location
+            name: Dadvan Location
+            icon: mdi:map-marker
+          - type: tile
+            entity: sensor.chrysler_dadvan_health_report
+            name: Health Report
+            icon: mdi:clipboard-pulse
+          - type: tile
+            entity: automation.uconnect_dadvan_stale_data_alert
+            name: Stale Data Alert
+            icon: mdi:bell-alert
+          - type: markdown
+            content: |
+              ## Freshness rule
+
+              If **Last Vehicle Data** is old, Home Assistant may be working correctly but Uconnect/SyncUP/Stellantis may not have received fresh data from the van.
+
+              Since the van was last driven on July 10, stale July 10 data may be normal until the next drive.
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Vehicle Health
+            icon: mdi:car-info
+          - type: tile
+            entity: sensor.chrysler_dadvan_odometer
+            name: Odometer
+            icon: mdi:counter
+          - type: gauge
+            entity: sensor.chrysler_dadvan_fuel_remaining
+            name: Fuel Remaining
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 35
+              yellow: 15
+              red: 0
+          - type: gauge
+            entity: sensor.chrysler_dadvan_oil_life
+            name: Oil Life
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 35
+              yellow: 15
+              red: 0
+          - type: tile
+            entity: sensor.chrysler_dadvan_fuel_type
+            name: Fuel Type
+            icon: mdi:gas-station
+          - type: tile
+            entity: sensor.chrysler_dadvan_maintenance_history
+            name: Maintenance History
+            icon: mdi:wrench-clock
+          - type: tile
+            entity: binary_sensor.chrysler_dadvan_stolen_vehicle_status
+            name: Stolen Vehicle Status
+            icon: mdi:shield-car
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Tire Pressure
+            icon: mdi:car-tire-alert
+          - type: gauge
+            entity: sensor.chrysler_dadvan_front_left_tire_pressure
+            name: Front Left
+            min: 20
+            max: 45
+            needle: true
+            severity:
+              green: 30
+              yellow: 26
+              red: 20
+          - type: gauge
+            entity: sensor.chrysler_dadvan_front_right_tire_pressure
+            name: Front Right
+            min: 20
+            max: 45
+            needle: true
+            severity:
+              green: 30
+              yellow: 26
+              red: 20
+          - type: gauge
+            entity: sensor.chrysler_dadvan_rear_left_tire_pressure
+            name: Rear Left
+            min: 20
+            max: 45
+            needle: true
+            severity:
+              green: 30
+              yellow: 26
+              red: 20
+          - type: gauge
+            entity: sensor.chrysler_dadvan_rear_right_tire_pressure
+            name: Rear Right
+            min: 20
+            max: 45
+            needle: true
+            severity:
+              green: 30
+              yellow: 26
+              red: 20
+          - type: tile
+            entity: binary_sensor.chrysler_dadvan_tire_pressure_front_left_warning
+            name: Front Left Warning
+          - type: tile
+            entity: binary_sensor.chrysler_dadvan_tire_pressure_front_right_warning
+            name: Front Right Warning
+          - type: tile
+            entity: binary_sensor.chrysler_dadvan_tire_pressure_rear_left_warning
+            name: Rear Left Warning
+          - type: tile
+            entity: binary_sensor.chrysler_dadvan_tire_pressure_rear_right_warning
+            name: Rear Right Warning
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Location
+            icon: mdi:map
+          - type: map
+            title: Dadvan Location
+            entities:
+              - device_tracker.garage_chrysler_dadvan_location
+            hours_to_show: 24
+          - type: tile
+            entity: button.garage_chrysler_dadvan_refresh_location
+            name: Request Location Refresh
+            icon: mdi:map-marker-sync
+          - type: markdown
+            content: |
+              ## Location notes
+
+              Current location entity may show `unavailable` until Uconnect/SyncUP returns usable GPS data.
+
+              If the official app is also stale, troubleshoot the OBD plug/device, cellular/GPS LED, subscription/account state, and vehicle drive cycle first.
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Safe Refresh Actions
+            icon: mdi:refresh-circle
+          - type: tile
+            entity: button.garage_chrysler_dadvan_update_data
+            name: Update Data
+            icon: mdi:update
+          - type: tile
+            entity: button.garage_chrysler_dadvan_deep_refresh
+            name: Deep Refresh
+            icon: mdi:cloud-refresh
+          - type: tile
+            entity: update.uconnect_update
+            name: Uconnect Integration Update
+            icon: mdi:package-up
+          - type: markdown
+            content: |
+              ## Refresh actions
+
+              **Update Data** asks the Uconnect cloud for the newest available data.  
+              **Deep Refresh** may not work for this van and is not guaranteed to force fresh data from a sleeping/offline vehicle.
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Deliberate Vehicle Commands
+            icon: mdi:car-key
+          - type: markdown
+            content: |
+              ## ⚠️ Use deliberately
+
+              These controls can cause real-world vehicle actions. Use only when you mean it.
+
+              If a state is `unknown`, verify in the official app or visually at the van before assuming command success/failure.
+          - type: tile
+            entity: lock.garage_chrysler_dadvan_doors_lock
+            name: Doors
+            icon: mdi:car-door-lock
+          - type: tile
+            entity: switch.garage_chrysler_dadvan_engine
+            name: Engine / Remote Start
+            icon: mdi:engine
+          - type: tile
+            entity: button.garage_chrysler_dadvan_lights_horn
+            name: Lights & Horn
+            icon: mdi:bullhorn
+
+      - type: grid
+        cards:
+          - type: heading
+            heading: Troubleshooting Checklist
+            icon: mdi:clipboard-check-outline
+          - type: markdown
+            content: |
+              ## Next physical checks
+
+              1. Start/drive Dadvan and confirm data refreshes after the trip.
+              2. Compare Home Assistant with the official Chrysler/Uconnect app and T-Mobile/T-Life SyncUP DRIVE app.
+              3. Check SyncUP DRIVE LED while outside/running: solid green is expected for cellular/GPS.
+              4. If data stays stale after driving, reseat/restart the OBD-II plug.
+              5. If still stale, check connected-services/subscription/account state.
+
+              ## BATCAVE docs
+
+              See `projects/BAT-005_Vehicle_Integration_Reliability/` for investigation notes.

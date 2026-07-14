@@ -23,4 +23,8 @@
 - [ ] Confirm connected services/subscription status.
 - [ ] Determine whether PIN setup is needed for command refresh behavior.
 - [ ] Decide whether command entities should be exposed on dashboards.
-- [ ] Add vehicle freshness/staleness card to dashboard.
+- [x] Add vehicle freshness/staleness card to dashboard source.
+- [x] Add standalone Dadvan command center dashboard source.
+- [x] Add Dadvan view to Operations Center source dashboard.
+- [ ] Sync Vehicles/Dadvan dashboard changes into the live Home Assistant dashboard UI.
+- [ ] Verify Dadvan dashboard renders correctly on desktop/mobile.

@@ -103,6 +103,24 @@ It shows:
 - Terry battery/error/Wi-Fi
 - Terry room clean buttons
 
+### Vehicles
+
+Use this to check Dadvan status and Uconnect data freshness.
+
+It shows:
+
+- Last Dadvan vehicle data timestamp
+- Last location update and location map
+- Fuel remaining
+- Oil life
+- Odometer
+- Tire pressure gauges and tire warnings
+- Uconnect refresh buttons
+- Deliberate vehicle controls for doors, remote start, and lights/horn
+- Troubleshooting checklist for stale SyncUP/Uconnect data
+
+Use the vehicle controls deliberately. Lock, remote start, horn, and light commands can cause real-world vehicle actions.
+
 ### Automations
 
 Use this to verify important automations are present and enabled.
@@ -134,6 +152,7 @@ Examples of controls that should be reviewed carefully before adding:
 
 - Main water shutoff
 - Hose valve actuation
+- Vehicle lock/start/horn/light commands
 - Locks
 - Sirens
 - Alarm system actions

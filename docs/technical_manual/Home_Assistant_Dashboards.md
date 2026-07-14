@@ -24,6 +24,7 @@ Dashboards must follow the BATCAVE philosophy:
 |---|---|
 | `home_assistant/dashboards/batcave-operations-center.yaml` | **Live dashboard source of truth** for the BATCAVE Operations Center currently installed in Home Assistant dashboard storage. |
 | `home_assistant/dashboards/batcave-operations-center.backup-2026-07-13.yaml` | Backup of the Operations Center before the 2026-07-13 expansion. |
+| `home_assistant/dashboards/dadvan-command-center.yaml` | Standalone Dadvan / vehicle dashboard source using live Uconnect entities. |
 | `home_assistant/dashboards/batcave-command-center.yaml` | Initial generated dashboard draft retained as a reference artifact. |
 | `home_assistant/dashboards/README.md` | Dashboard folder usage notes and installation guidance. |
 
@@ -135,6 +136,25 @@ B-hyve control/status design, added 2026-07-13:
 - The output-port count is intentionally hidden because this installation uses a single-output B-hyve device.
 
 This distinction is intentional because the older integration previously showed the switch as `on` even when the physical hose timer was not watering. After updating Orbit B-hyve BLE from `v0.0.8` to `v0.1.0`, the status sensor should be used for displayed state. The older `sensor.bhyve_ble_44_67_55_86_26_9d_last_message_type` may be restored/unavailable and should not be used as the primary dashboard status.
+
+### Vehicles
+
+Dadvan / vehicle status and command view.
+
+Includes:
+
+- Dadvan dashboard header and placeholder van image (`/local/batcave/dadvan.svg`)
+- Uconnect data freshness (`sensor.chrysler_dadvan_last_info_update_at`)
+- Location freshness and tracker status
+- Odometer, fuel, oil life, health report, and maintenance fields
+- Tire pressure gauges and tire warning binary sensors
+- Uconnect refresh buttons
+- Deliberate vehicle commands for doors, remote start, and lights/horn
+- Troubleshooting checklist for SyncUP DRIVE / Uconnect stale data
+
+Safety note: vehicle commands are grouped under **Deliberate Vehicle Commands** with an explicit warning. These controls can cause real-world vehicle actions and should be used intentionally.
+
+Image note: the Dadvan placeholder image is source-controlled at `home_assistant/www/batcave/dadvan.svg`. To render live, copy it to Home Assistant at `/config/www/batcave/dadvan.svg`; the dashboard references it as `/local/batcave/dadvan.svg`.
 
 ### Automations
 

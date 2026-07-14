@@ -12,6 +12,8 @@
 - Added stale-data notification automation for Chrysler Dadvan telemetry.
 - Added T-Mobile SyncUP DRIVE / OBD-II research notes.
 - Added vehicle tracking alternatives comparison including Traccar and API-first OBD trackers.
+- Added standalone Dadvan dashboard source and Vehicles view for the BATCAVE Operations Center.
+- Added Dadvan SVG placeholder image for the dashboard.
 
 ### Findings
 
@@ -28,4 +30,4 @@
 - Observe whether Dadvan data refreshes after driving.
 - Determine whether Uconnect/SiriusXM Guardian subscription state affects refresh behavior.
 - Determine whether command PIN setup improves refresh/location command success.
-- Add vehicle dashboard status/freshness card.
+- Sync the source-controlled Vehicles/Dadvan view into the live Home Assistant dashboard UI and verify rendering.

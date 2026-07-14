@@ -102,6 +102,12 @@ Preliminary recommendation: do not replace the current setup yet. First drive th
 - Tested `button.garage_chrysler_dadvan_refresh_location`; it returned an error, likely unsupported/rejected for the vehicle/account or requiring different command credentials/PIN behavior.
 - Added stale-data alert automation:
   - `automation.uconnect_dadvan_stale_data_alert`
+- Added Dadvan dashboard source:
+  - `home_assistant/dashboards/dadvan-command-center.yaml`
+- Added Dadvan view to the BATCAVE Operations Center source dashboard:
+  - `home_assistant/dashboards/batcave-operations-center.yaml`
+- Added Dadvan dashboard placeholder image:
+  - `home_assistant/www/batcave/dadvan.svg`
 
 ## Automation added
 
@@ -128,4 +134,4 @@ Possible root causes:
 3. Confirm Uconnect/SiriusXM Guardian connected services subscription status.
 4. Investigate whether a PIN enables more command refresh functionality.
 5. Decide whether to expose command entities on a dashboard, with lock/engine/horn controls protected or hidden.
-6. Add a vehicle dashboard card showing stale/fresh status clearly.
+6. Sync the new Vehicles/Dadvan dashboard view into the live Home Assistant dashboard UI and verify rendered layout.

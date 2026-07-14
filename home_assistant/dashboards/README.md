@@ -24,6 +24,10 @@ Backup of the BATCAVE Operations Center raw dashboard YAML before the 2026-07-13
 
 Keep this file as a rollback reference until the updated dashboard has been reviewed over time.
 
+### `dadvan-command-center.yaml`
+
+Standalone Dadvan / vehicle dashboard source. It uses live Uconnect/Dadvan entities for vehicle health, freshness, location, tire pressure, and deliberate vehicle commands. The same content is also represented as the **Vehicles** view in `batcave-operations-center.yaml`.
+
 ### `batcave-command-center.yaml`
 
 Initial generated dashboard draft built from live Home Assistant entities. This is retained as a design/reference artifact, but the active dashboard is now `batcave-operations-center.yaml`.
@@ -43,6 +47,7 @@ Live Operations Center views included:
 - **Security** — front camera, Malachi room camera, detection entities, camera status
 - **Environment** — thermostat, Henry humidifier, room temperature/humidity, trends
 - **Utilities** — B-hyve BLE status, water-protection roadmap, Terry vacuum controls/status
+- **Vehicles** — Dadvan Uconnect freshness, vehicle health, tire pressure, location, and deliberate command controls
 - **Automations** — mode, presence, lighting/comfort, and Terry automations
 - **Engineering** — GitHub/repository links, active work, documentation references, health helpers
 
@@ -60,6 +65,14 @@ BATCAVE Operations Center → Edit dashboard → Raw configuration editor
 ```
 
 The repository copy of `batcave-operations-center.yaml` is the documented source of truth for the live dashboard configuration.
+
+The Dadvan dashboard image source is tracked at `home_assistant/www/batcave/dadvan.svg`. To render in Home Assistant, place it at:
+
+```text
+/config/www/batcave/dadvan.svg
+```
+
+Home Assistant serves `/config/www/...` files under `/local/...`, so the dashboard references it as `/local/batcave/dadvan.svg`.
 
 Until a Git/file-based deployment path is installed, changes should be applied in this order:
 
